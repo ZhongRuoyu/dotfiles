@@ -1,0 +1,23 @@
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[user]
+	name = Zhong Ruoyu
+	email = zhongruoyu@outlook.com
+	signingKey = zhongruoyu@outlook.com
+[core]
+	excludesFile = ~/.gitignore_global
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[credential]
+	helper = osxkeychain
+[url "https://"]
+	insteadOf = git://
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/
