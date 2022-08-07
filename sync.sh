@@ -2,7 +2,8 @@
 
 excluded() {
     local excludes=(
-        "$(basename "$0")"
+        "install.sh"
+        "sync.sh"
         "LICENSE"
     )
     local file
@@ -20,6 +21,14 @@ for file in "${files[@]}"; do
     if excluded "$file"; then
         continue
     fi
-    cp "$HOME/$file" "$file"
+    if [ ! -e "$HOME/$file" ]; then
+        echo "warning: $HOME/$file does not exist; skipped"
+        continue
+    fi
+    if [ ! -f "$HOME/$file" ]; then
+        echo "warning: $HOME/$file is not a regular file; skipped"
+        continue
+    fi
+    cp "$HOME/$file" .
     echo "$file"
 done
