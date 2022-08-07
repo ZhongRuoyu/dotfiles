@@ -20,8 +20,8 @@ alias grep="grep --color=auto"
 
 # rm
 rm() {
-    echo "use command rm instead:" 1>&2
-    echo "command rm $@" 1>&2
+    echo "use command rm instead:" >&2
+    echo "command rm $@" >&2
     return 1
 }
 
