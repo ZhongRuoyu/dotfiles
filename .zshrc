@@ -113,13 +113,16 @@ source $ZSH/oh-my-zsh.sh >/dev/null 2>/dev/null
 
 
 
-# PS1 settings
-PS1="[%n@%m %1~]%(!.#.$) "
-HOST_="Ruoyus-MacBook-Pro"
-PS1="[%n@$HOST_ %1~]%(!.#.$) "
-unset HOST_
+# Prompt settings
+# PS1="[%n@%m %1~]%(!.#.$) "
+user="ruoyu"  # "%n"
+host="Ruoyus-MacBook-Pro"  # "%m"
+PS1="[$user@$host %1~]%(!.#.$) "
+unset user
+unset host
 
 # History control
-setopt histignorespace
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
 
 

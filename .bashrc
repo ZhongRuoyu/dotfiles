@@ -1,10 +1,12 @@
-# PS1 settings
+# Prompt settings
 [ "$PS1" = "\\s-\\v\\\$ " ] && PS1="[\u@\h \W]\\$ "
-HOST_="Ruoyus-MacBook-Pro"
-PS1="[\u@$HOST_ \W]\\$ "
-unset HOST_
+user="ruoyu"  # "\u"
+host="Ruoyus-MacBook-Pro"  # "\h"
+PS1="[$user@$host \W]\\$ "
+unset user
+unset host
 
 # History control
-export HISTCONTROL=ignorespace
+HISTCONTROL=ignoreboth
 
 
