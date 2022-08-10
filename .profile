@@ -66,9 +66,11 @@ export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/llvm/bin"
 export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/opt/openssl/include"
 export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/opt/openssl/lib"
 
+# Ruby
+export PATH="$HOMEBREW_PREFIX/opt/ruby/bin${PATH:+:$PATH}"
+
 
 # Java
-export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/openjdk/bin"
 export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*:."
 
@@ -95,21 +97,10 @@ unset __conda_setup
 # conda
 conda activate python3.10
 
-# Pygments
-alias ccat="pygmentize -g"
-
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# nvm use --lts >/dev/null
-
-# npm
-# export PATH="${PATH:+$PATH:}$HOME/.npm/bin"
-
-
-# Ruby
-export PATH="$HOMEBREW_PREFIX/opt/ruby/bin${PATH:+:$PATH}"
 
 
