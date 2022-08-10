@@ -25,6 +25,9 @@ rm() {
     return 1
 }
 
+# sudo
+alias sudo="sudo "
+
 # tar
 tar() {
     COPYFILE_DISABLE=1 command tar --exclude=.DS_Store "$@"
