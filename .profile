@@ -42,11 +42,11 @@ export DYLD_FALLBACK_LIBRARY_PATH="${DYLD_FALLBACK_LIBRARY_PATH:+$DYLD_FALLBACK_
 # Homebrew
 # eval "$($HOME/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_PREFIX="$HOME/opt/homebrew"
-export HOMEBREW_CELLAR="$HOME/opt/homebrew/Cellar"
-export HOMEBREW_REPOSITORY="$HOME/opt/homebrew"
-export PATH="${PATH:+$PATH:}$HOME/opt/homebrew/bin:$HOME/opt/homebrew/sbin"
-export MANPATH=":${MANPATH:+$MANPATH:}$HOME/opt/homebrew/share/man"
-export INFOPATH="${INFOPATH:+$INFOPATH:}$HOME/opt/homebrew/share/info"
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
+export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin"
+export MANPATH=":${MANPATH:+$MANPATH:}$HOMEBREW_PREFIX/share/man"
+export INFOPATH=":${INFOPATH:+$INFOPATH:}$HOMEBREW_PREFIX/share/info"
 export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/include"
 export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/lib"
 
