@@ -31,10 +31,11 @@ tar() {
 }
 
 
-# Local PATH settings
+# Local settings
 export PATH="${PATH:+$PATH:}$HOME/local/bin"
+export MANPATH=":${MANPATH:+$MANPATH:}$HOME/local/share/man"
+export INFOPATH=":${INFOPATH:+$INFOPATH:}$HOME/local/share/info"
 export CPATH="${CPATH:+$CPATH:}$HOME/local/include"
-export MANPATH=":$MANPATH"
 export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOME/local/lib"
 export DYLD_FALLBACK_LIBRARY_PATH="${DYLD_FALLBACK_LIBRARY_PATH:+$DYLD_FALLBACK_LIBRARY_PATH:}$HOME/local/lib"
 
@@ -49,6 +50,7 @@ export MANPATH=":${MANPATH:+$MANPATH:}$HOMEBREW_PREFIX/share/man"
 export INFOPATH=":${INFOPATH:+$INFOPATH:}$HOMEBREW_PREFIX/share/info"
 export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/include"
 export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/lib"
+export DYLD_FALLBACK_LIBRARY_PATH="${DYLD_FALLBACK_LIBRARY_PATH:+$DYLD_FALLBACK_LIBRARY_PATH:}$HOMEBREW_PREFIX/lib"
 
 # GNU Binutils
 export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/binutils/bin"
