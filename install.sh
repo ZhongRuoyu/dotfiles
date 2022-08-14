@@ -15,24 +15,36 @@ excluded() {
     return 1
 }
 
-files=($(git ls-tree --full-tree --name-only -r HEAD))
-
-for file in "${files[@]}"; do
+install() {
+    local file="$1"
     if excluded "$file"; then
         continue
     fi
     if [ -e "$HOME/$file" ]; then
         if [ ! -f "$HOME/$file" ]; then
             echo "warning: $HOME/$file is not a regular file; skipped"
-            continue
+            return
         fi
         read -p "$HOME/$file already exists; overwrite? [Y/n] " input
         case "$input" in
-            "") ;;
-            [Yy]*) ;;
-            *) continue;;
+        "") ;;
+        [Yy]*) ;;
+        *) return ;;
+        esac
+    else
+        read -p "install $file to $HOME/$file? [Y/n] " input
+        case "$input" in
+        "") ;;
+        [Yy]*) ;;
+        *) return ;;
         esac
     fi
     cp "$file" "$HOME"
-    echo "$file"
+    echo "$file installed to $HOME/$file"
+}
+
+files=($(git ls-tree --full-tree --name-only -r HEAD))
+
+for file in "${files[@]}"; do
+    install "$file"
 done
