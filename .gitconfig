@@ -15,8 +15,6 @@
 	gpgsign = true
 [credential]
 	helper = osxkeychain
-[url "https://"]
-	insteadOf = git://
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [url "git@gitlab.com:"]
