@@ -29,6 +29,6 @@ for file in "${files[@]}"; do
         echo "warning: $HOME/$file is not a regular file; skipped"
         continue
     fi
-    cp "$HOME/$file" .
+    cp "$HOME/$file" "$file"
     echo "$file"
 done
