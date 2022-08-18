@@ -95,7 +95,7 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # conda
-conda activate python3.10
+conda activate default
 
 
 # nvm
