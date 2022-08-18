@@ -62,6 +62,9 @@ export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin${PATH:+:$PATH}"
 # LLVM
 export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/llvm/bin"
 
+# OpenJDK
+export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin${PATH:+:$PATH}"
+
 # OpenSSL
 export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/opt/openssl/include"
 export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/opt/openssl/lib"
@@ -71,8 +74,7 @@ export PATH="$HOMEBREW_PREFIX/opt/ruby/bin${PATH:+:$PATH}"
 
 
 # Java
-export JAVA_HOME=$(/usr/libexec/java_home -v 17)
-export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*:."
+export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*"
 
 
 # Go
