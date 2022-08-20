@@ -64,6 +64,7 @@ export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/llvm/bin"
 
 # OpenJDK
 export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin${PATH:+:$PATH}"
+export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
 # OpenSSL
 export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/opt/openssl/include"
