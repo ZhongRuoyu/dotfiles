@@ -69,6 +69,7 @@ export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin${PATH:+:$PATH}"
 export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
 # OpenSSL
+export PATH="$HOMEBREW_PREFIX/opt/openssl/bin${PATH:+:$PATH}"
 export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/opt/openssl/include"
 export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/opt/openssl/lib"
 
