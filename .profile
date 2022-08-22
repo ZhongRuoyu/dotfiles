@@ -61,6 +61,8 @@ export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin${PATH:+:$PATH}"
 
 # LLVM
 export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/llvm/bin"
+export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/opt/llvm/include"
+export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/opt/llvm/lib"
 
 # OpenJDK
 export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin${PATH:+:$PATH}"
