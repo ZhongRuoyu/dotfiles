@@ -77,6 +77,7 @@ plugins=(
     git
     golang
     httpie
+    macos
     npm
     nvm
     pip
