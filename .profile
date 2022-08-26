@@ -30,7 +30,16 @@ alias sudo="sudo "
 
 # tar
 tar() {
-    COPYFILE_DISABLE=1 command tar --exclude=.DS_Store "$@"
+    if [ "$#" -eq 0 ]; then
+        COPYFILE_DISABLE=1 command tar --exclude=.DS_Store
+        return
+    fi
+    local options="$1"
+    shift
+    if [ "${options:0:1}" != "-" ]; then
+        options="-$options"
+    fi
+    COPYFILE_DISABLE=1 command tar --exclude=.DS_Store "$options" "$@"
 }
 
 
