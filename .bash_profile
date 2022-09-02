@@ -1,6 +1,8 @@
 source $HOME/.profile
 source $HOME/.bashrc
 
+
+# Homebrew completions
 if type brew &>/dev/null; then
     if [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
         source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
@@ -10,4 +12,5 @@ if type brew &>/dev/null; then
         done
     fi
 fi
+
 
