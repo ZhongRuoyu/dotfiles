@@ -6,6 +6,7 @@ PS1="[$user@$host \W]\\$ "
 unset user
 unset host
 
+
 # History control
 HISTCONTROL=ignoreboth
 
