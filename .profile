@@ -94,6 +94,7 @@ export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*"
 export GOPRIVATE="${GOPRIVATE:+$GOPRIVATE,}"
 
 
+# Anaconda
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$($HOME/opt/anaconda3/bin/conda "shell.$(basename "$SHELL")" hook 2>/dev/null)"
@@ -108,8 +109,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# conda
 conda activate default
 
 
