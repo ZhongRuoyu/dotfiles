@@ -58,21 +58,15 @@ export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOME/local/lib"
 
 
 # Homebrew
-# eval "$($HOME/opt/homebrew/bin/brew shellenv)"
+# eval "$("$HOME/opt/homebrew/bin/brew" shellenv)"
 export HOMEBREW_PREFIX="$HOME/opt/homebrew"
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
-export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin"
-export MANPATH=":${MANPATH:+$MANPATH:}$HOMEBREW_PREFIX/share/man"
-export INFOPATH=":${INFOPATH:+$INFOPATH:}$HOMEBREW_PREFIX/share/info"
-export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/include"
-export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/lib"
-
-# GNU Binutils
-export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/binutils/bin"
-
-# GNU sed
-export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin${PATH:+:$PATH}"
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH:+:$PATH}"
+export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH:+:$MANPATH}:"
+export INFOPATH="$HOMEBREW_PREFIX/share/info${INFOPATH:+:$INFOPATH}:"
+export CPATH="$HOMEBREW_PREFIX/include${CPATH:+:$CPATH}"
+export LIBRARY_PATH="$HOMEBREW_PREFIX/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 
 # LLVM
 export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/llvm/bin"
@@ -84,7 +78,7 @@ export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin${PATH:+:$PATH}"
 export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
 # OpenSSL
-export PATH="$HOMEBREW_PREFIX/opt/openssl/bin${PATH:+:$PATH}"
+export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/openssl/bin"
 export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/opt/openssl/include"
 export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/opt/openssl/lib"
 
