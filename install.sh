@@ -25,8 +25,10 @@ install() {
             echo "warning: $HOME/$file is not a regular file; skipped"
             return
         fi
-        read -p "$HOME/$file already exists; overwrite? [Y/n] " input
-        case "$input" in
+        if cmp -s "$file" "$HOME/$file"; then
+            echo "$file is up to date."
+            return
+        fi
         "") ;;
         [Yy]*) ;;
         *) return ;;
