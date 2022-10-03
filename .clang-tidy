@@ -5,10 +5,11 @@ Checks: |
   concurrency-*
   cppcoreguidelines-*
   google-*
+  modernize-*
+  -modernize-use-trailing-return-type
   performance-*
   portability-*
   readability-*
-# modernize-*
 CheckOptions:
   - key: readability-identifier-naming.IgnoreMainLikeFunctions
     value: 1
