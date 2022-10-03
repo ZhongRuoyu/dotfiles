@@ -29,10 +29,15 @@ install() {
             echo "$file is up to date."
             return
         fi
-        "") ;;
-        [Yy]*) ;;
-        *) return ;;
-        esac
+        while true; do
+            read -p "$HOME/$file already exists; overwrite? [Y/n/diff] " input
+            case "$input" in
+            "") break ;;
+            [Yy]*) break ;;
+            diff) diff "$file" "$HOME/$file" | ${PAGER:-less} ;;
+            *) return ;;
+            esac
+        done
     else
         read -p "install $file to $HOME/$file? [Y/n] " input
         case "$input" in
