@@ -6,9 +6,10 @@ excluded() {
         "sync.sh"
         "LICENSE"
     )
-    local file
-    for file in "${excludes[@]}"; do
-        if [ "$1" = "$file" ]; then
+    local file="$1"
+    shift
+    for exclude in "${excludes[@]}"; do
+        if [ "$file" = "$exclude" ]; then
             return 0
         fi
     done
@@ -22,13 +23,12 @@ for file in "${files[@]}"; do
         continue
     fi
     if [ ! -e "$HOME/$file" ]; then
-        echo "warning: $HOME/$file does not exist; skipped"
+        echo "Warning: $HOME/$file does not exist; skipped"
         continue
     fi
     if [ ! -f "$HOME/$file" ]; then
-        echo "warning: $HOME/$file is not a regular file; skipped"
+        echo "Warning: $HOME/$file is not a regular file; skipped"
         continue
     fi
-    cp "$HOME/$file" "$file"
-    echo "$file"
+    cp -v "$HOME/$file" "$file"
 done
