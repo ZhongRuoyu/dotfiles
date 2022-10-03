@@ -48,6 +48,7 @@ install() {
         *) return ;;
         esac
     fi
+    mkdir -p "$(dirname "$HOME/$file")"
     cp -v "$file" "$HOME/$file"
 }
 
