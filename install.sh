@@ -20,7 +20,7 @@ install() {
     local file="$1"
     shift
     if excluded "$file"; then
-        continue
+        return
     fi
     if [ -e "$HOME/$file" ]; then
         if [ ! -f "$HOME/$file" ]; then
