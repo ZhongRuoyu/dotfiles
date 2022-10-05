@@ -16,19 +16,29 @@ excluded() {
     return 1
 }
 
-files=($(git ls-tree --full-tree --name-only -r HEAD))
-
-for file in "${files[@]}"; do
+sync() {
+    local file="$1"
+    shift
     if excluded "$file"; then
-        continue
+        return
     fi
     if [ ! -e "$HOME/$file" ]; then
         echo "Warning: $HOME/$file does not exist; skipped"
-        continue
+        return
     fi
     if [ ! -f "$HOME/$file" ]; then
         echo "Warning: $HOME/$file is not a regular file; skipped"
-        continue
+        return
+    fi
+    if cmp -s "$file" "$HOME/$file"; then
+        echo "$file is up to date."
+        return
     fi
     cp -v "$HOME/$file" "$file"
+}
+
+files=($(git ls-tree --full-tree --name-only -r HEAD))
+
+for file in "${files[@]}"; do
+    sync "$file"
 done
