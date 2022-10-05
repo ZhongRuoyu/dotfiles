@@ -14,7 +14,7 @@ plugins=(
     pip
     rust
 )
-source $ZSH/oh-my-zsh.sh >/dev/null 2>/dev/null
+source "$ZSH/oh-my-zsh.sh"
 
 
 # Prompt settings
