@@ -1,5 +1,5 @@
 # Prompt settings
-[ "$PS1" = "\\s-\\v\\\$ " ] && PS1="[\u@\h \W]\\$ "
+PS1="[\u@\h \W]\\$ "
 
 
 # History control
