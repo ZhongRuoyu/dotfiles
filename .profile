@@ -82,9 +82,6 @@ export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/openssl/bin"
 export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/opt/openssl/include"
 export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/opt/openssl/lib"
 
-# Ruby
-export PATH="$HOMEBREW_PREFIX/opt/ruby/bin${PATH:+:$PATH}"
-
 
 # Java
 export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*"
