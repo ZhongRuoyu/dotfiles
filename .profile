@@ -68,20 +68,6 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info${INFOPATH:+:$INFOPATH}:"
 export CPATH="$HOMEBREW_PREFIX/include${CPATH:+:$CPATH}"
 export LIBRARY_PATH="$HOMEBREW_PREFIX/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 
-# LLVM
-export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/llvm/bin"
-export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/opt/llvm/include"
-export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/opt/llvm/lib"
-
-# OpenJDK
-export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin${PATH:+:$PATH}"
-export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
-
-# OpenSSL
-export PATH="${PATH:+$PATH:}$HOMEBREW_PREFIX/opt/openssl/bin"
-export CPATH="${CPATH:+$CPATH:}$HOMEBREW_PREFIX/opt/openssl/include"
-export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/opt/openssl/lib"
-
 
 # Java
 export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*"
@@ -113,5 +99,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # rbenv
 eval "$(rbenv init - "$(basename "$SHELL")")"
+
+
+# Local profile settings
+if [ -e "$HOME/.profile.local" ]; then
+    source "$HOME/.profile.local"
+fi
 
 

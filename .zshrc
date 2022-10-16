@@ -18,16 +18,17 @@ source "$ZSH/oh-my-zsh.sh"
 
 
 # Prompt settings
-# PS1="[%n@%m %1~]%(!.#.$) "
-user="ruoyu"  # "%n"
-host="Ruoyus-MacBook-Pro"  # "%m"
-PS1="[$user@$host %1~]%(!.#.$) "
-unset user
-unset host
+PS1="[%n@%m %1~]%(!.#.$) "
 
 
 # History control
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
+
+
+# Local zsh settings
+if [ -e "$HOME/.zshrc.local" ]; then
+    source "$HOME/.zshrc.local"
+fi
 
 
