@@ -87,10 +87,6 @@ export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOMEBREW_PREFIX/opt/openssl
 export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*"
 
 
-# Go
-export GOPRIVATE="${GOPRIVATE:+$GOPRIVATE,}"
-
-
 # Anaconda
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
