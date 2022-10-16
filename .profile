@@ -26,7 +26,7 @@ alias grep="grep --color=auto"
 
 # rm
 rm() {
-    echo "use command rm instead:" >&2
+    echo "use \`command rm' instead:" >&2
     echo "command rm $@" >&2
     return 1
 }
@@ -37,8 +37,8 @@ alias sudo="sudo "
 # tar
 tar() {
     if [ "$#" -eq 0 ]; then
-        COPYFILE_DISABLE=1 command tar --exclude=.DS_Store
-        return
+        echo "tar: missing arguments" >&2
+        return 1
     fi
     local options="$1"
     shift
