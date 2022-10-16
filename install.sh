@@ -32,18 +32,16 @@ install() {
             return
         fi
         while true; do
-            read -p "$HOME/$file already exists; overwrite? [Y/n/diff] " input
+            read -p "$HOME/$file already exists; overwrite? [y/N/diff] " input
             case "$input" in
-            "") break ;;
             [Yy]*) break ;;
             diff) diff "$file" "$HOME/$file" | ${PAGER:-less} ;;
             *) return ;;
             esac
         done
     else
-        read -p "Install $file to $HOME/$file? [Y/n] " input
+        read -p "Install $file to $HOME/$file? [y/N] " input
         case "$input" in
-        "") ;;
         [Yy]*) ;;
         *) return ;;
         esac
