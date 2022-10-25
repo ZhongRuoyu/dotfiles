@@ -74,27 +74,63 @@ export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*"
 
 
 # Anaconda
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("$HOME/opt/anaconda3/bin/conda" "shell.$(basename "$SHELL")" hook 2>/dev/null)"
-if [ "$?" -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
+conda_aliases=(
+    conda
+    2to3
+    idle3
+    pip pip3
+    pydoc pydoc3
+    python python3
+    python3-config
+    wheel wheel3
+)
+load_conda() {
+    unset -f load_conda
+    for conda_alias in "${conda_aliases[@]}"; do
+        unalias "$conda_alias"
+    done
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$("$HOME/opt/anaconda3/bin/conda" "shell.$(basename "$SHELL")" hook 2>/dev/null)"
+    if [ "$?" -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="$HOME/opt/anaconda3/bin${PATH:+:$PATH}"
+        if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="$HOME/opt/anaconda3/bin${PATH:+:$PATH}"
+        fi
     fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-conda activate default
+    unset __conda_setup
+    # <<< conda initialize <<<
+    conda activate default
+}
+for conda_alias in "${conda_aliases[@]}"; do
+    alias "$conda_alias"="load_conda && $conda_alias"
+done
 
 
 # nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+nvm_aliases=(
+    nvm
+    node
+    npm
+    npx
+)
+load_nvm() {
+    unset -f load_nvm
+    for nvm_alias in "${nvm_aliases[@]}"; do
+        unalias "$nvm_alias"
+    done
+
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
+for nvm_alias in "${nvm_aliases[@]}"; do
+    alias "$nvm_alias"="load_nvm && $nvm_alias"
+done
 
 
 # rbenv
