@@ -36,16 +36,14 @@ alias sudo="sudo "
 
 # tar
 tar() {
-    if [ "$#" -eq 0 ]; then
-        echo "tar: missing arguments" >&2
-        return 1
+    if [ "$#" -ge 1 ]; then
+        local options="$1"
+        if [ "${options:0:1}" != "-" ]; then
+            options="-$options"
+        fi
+        set -- "$options" "${@:2}"
     fi
-    local options="$1"
-    shift
-    if [ "${options:0:1}" != "-" ]; then
-        options="-$options"
-    fi
-    COPYFILE_DISABLE=1 command tar --exclude=.DS_Store "$options" "$@"
+    COPYFILE_DISABLE=1 command tar --exclude=.DS_Store "$@"
 }
 
 
