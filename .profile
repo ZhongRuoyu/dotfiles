@@ -101,7 +101,7 @@ load_conda() {
     uninstall_conda_aliases
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
-    local shell="$(ps -o comm= -p "$$" | sed -En 's/^(.*\/)?-?(.*)$/\2/p')"
+    local shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
     __conda_setup="$("$HOME/opt/anaconda3/bin/conda" "shell.$shell" hook 2>/dev/null)"
     if [ "$?" -eq 0 ]; then
         eval "$__conda_setup"
