@@ -84,12 +84,23 @@ conda_aliases=(
     python3-config
     wheel wheel3
 )
+install_conda_aliases() {
+    unset -f install_conda_aliases
+    local conda_alias
+    for conda_alias in "${conda_aliases[@]}"; do
+        alias "$conda_alias"="load_conda && $conda_alias"
+    done
+}
+uninstall_conda_aliases() {
+    unset -f uninstall_conda_aliases
+    local conda_alias
+    for conda_alias in "${conda_aliases[@]}"; do
+        unalias "$conda_alias" || true
+    done
+}
 load_conda() {
     unset -f load_conda
-    for conda_alias in "${conda_aliases[@]}"; do
-        unalias "$conda_alias"
-    done
-
+    uninstall_conda_aliases
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
     __conda_setup="$("$HOME/opt/anaconda3/bin/conda" "shell.$(basename "$SHELL")" hook 2>/dev/null)"
@@ -106,9 +117,7 @@ load_conda() {
     # <<< conda initialize <<<
     conda activate default
 }
-for conda_alias in "${conda_aliases[@]}"; do
-    alias "$conda_alias"="load_conda && $conda_alias"
-done
+install_conda_aliases
 
 
 # nvm
@@ -118,19 +127,28 @@ nvm_aliases=(
     npm
     npx
 )
+install_nvm_aliases() {
+    unset -f install_nvm_aliases
+    local nvm_alias
+    for nvm_alias in "${nvm_aliases[@]}"; do
+        alias "$nvm_alias"="load_nvm && $nvm_alias"
+    done
+}
+uninstall_nvm_aliases() {
+    unset -f uninstall_nvm_aliases
+    local nvm_alias
+    for nvm_alias in "${nvm_aliases[@]}"; do
+        unalias "$nvm_alias" || true
+    done
+}
 load_nvm() {
     unset -f load_nvm
-    for nvm_alias in "${nvm_aliases[@]}"; do
-        unalias "$nvm_alias"
-    done
-
+    uninstall_nvm_aliases
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 }
-for nvm_alias in "${nvm_aliases[@]}"; do
-    alias "$nvm_alias"="load_nvm && $nvm_alias"
-done
+install_nvm_aliases
 
 
 # rbenv
