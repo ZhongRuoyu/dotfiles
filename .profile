@@ -101,7 +101,8 @@ load_conda() {
     uninstall_conda_aliases
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$("$HOME/opt/anaconda3/bin/conda" "shell.$(basename "$SHELL")" hook 2>/dev/null)"
+    local shell="$(ps -p "$$" -o comm= | sed -En 's/^(.*\/)?-?(.*)$/\2/p')"
+    __conda_setup="$("$HOME/opt/anaconda3/bin/conda" "shell.$shell" hook 2>/dev/null)"
     if [ "$?" -eq 0 ]; then
         eval "$__conda_setup"
     else
@@ -150,7 +151,7 @@ install_nvm_aliases
 
 
 # rbenv
-eval "$(rbenv init - "$(basename "$SHELL")")"
+eval "$(rbenv init -)"
 
 
 # Local profile settings
