@@ -71,7 +71,7 @@ export LIBRARY_PATH="$HOMEBREW_PREFIX/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*"
 
 
-# Anaconda
+# Conda
 conda_aliases=(
     conda
     2to3
@@ -99,21 +99,17 @@ uninstall_conda_aliases() {
 load_conda() {
     unset -f load_conda
     uninstall_conda_aliases
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
     local shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
-    __conda_setup="$("$HOME/opt/anaconda3/bin/conda" "shell.$shell" hook 2>/dev/null)"
+    local conda_setup="$("$HOME/opt/miniforge3/bin/conda" "shell.$shell" hook 2>/dev/null)"
     if [ "$?" -eq 0 ]; then
-        eval "$__conda_setup"
+        eval "$conda_setup"
     else
-        if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-            . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
+        if [ -f "$HOME/opt/miniforge3/etc/profile.d/conda.sh" ]; then
+            source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
         else
-            export PATH="$HOME/opt/anaconda3/bin${PATH:+:$PATH}"
+            export PATH="$HOME/opt/miniforge3/bin${PATH:+:$PATH}"
         fi
     fi
-    unset __conda_setup
-    # <<< conda initialize <<<
     conda activate default
 }
 install_conda_aliases

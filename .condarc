@@ -1,1 +1,2 @@
+channels: [conda-forge]
 changeps1: false
