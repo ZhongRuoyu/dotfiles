@@ -1,2 +1,3 @@
+auto_activate_base: false
 channels: [conda-forge]
 changeps1: false
