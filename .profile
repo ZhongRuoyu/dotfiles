@@ -56,15 +56,11 @@ export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOME/local/lib"
 
 
 # Homebrew
-# eval "$("$HOME/opt/homebrew/bin/brew" shellenv)"
-export HOMEBREW_PREFIX="$HOME/opt/homebrew"
-export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
-export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH:+:$PATH}"
-export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH:+:$MANPATH}:"
-export INFOPATH="$HOMEBREW_PREFIX/share/info${INFOPATH:+:$INFOPATH}:"
-export CPATH="$HOMEBREW_PREFIX/include${CPATH:+:$CPATH}"
-export LIBRARY_PATH="$HOMEBREW_PREFIX/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+if [ -e "$HOME/opt/homebrew/bin/brew" ]; then
+    eval "$("$HOME/opt/homebrew/bin/brew" shellenv)"
+    export CPATH="$HOME/opt/homebrew/include${CPATH:+:$CPATH}"
+    export LIBRARY_PATH="$HOME/opt/homebrew/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+fi
 
 
 # Java
@@ -100,16 +96,8 @@ load_conda() {
     unset -f load_conda
     uninstall_conda_aliases
     local shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
-    local conda_setup="$("$HOME/opt/miniforge3/bin/conda" "shell.$shell" hook 2>/dev/null)"
-    if [ "$?" -eq 0 ]; then
-        eval "$conda_setup"
-    else
-        if [ -f "$HOME/opt/miniforge3/etc/profile.d/conda.sh" ]; then
-            source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
-        else
-            export PATH="$HOME/opt/miniforge3/bin${PATH:+:$PATH}"
-        fi
-    fi
+    local conda_setup="$("$HOME/opt/miniforge3/bin/conda" "shell.$shell" hook)"
+    eval "$conda_setup"
     conda activate default
 }
 install_conda_aliases
@@ -140,14 +128,18 @@ load_nvm() {
     unset -f load_nvm
     uninstall_nvm_aliases
     export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    source "$NVM_DIR/nvm.sh"
+    source "$NVM_DIR/bash_completion"
 }
 install_nvm_aliases
 
 
 # rbenv
-eval "$(rbenv init -)"
+if type rbenv &>/dev/null; then
+    eval "$(rbenv init -)"
+elif [ -e "$HOME/.rbenv/bin/rbenv" ]; then
+    eval "$("$HOME/.rbenv/bin/rbenv" init -)"
+fi
 
 
 # Local profile settings
