@@ -13,6 +13,7 @@ plugins=(
     nvm
     pip
     rust
+    ubuntu
 )
 source "$ZSH/oh-my-zsh.sh"
 
