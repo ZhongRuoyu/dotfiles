@@ -10,3 +10,9 @@ if type brew &>/dev/null; then
 fi
 
 
+# Local zsh profile
+if [ -e "$HOME/.zprofile.local" ]; then
+    source "$HOME/.zprofile.local"
+fi
+
+

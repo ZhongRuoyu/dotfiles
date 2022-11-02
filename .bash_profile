@@ -14,3 +14,9 @@ if type brew &>/dev/null; then
 fi
 
 
+# Local bash profile
+if [ -e "$HOME/.bash_profile.local" ]; then
+    source "$HOME/.bash_profile.local"
+fi
+
+
