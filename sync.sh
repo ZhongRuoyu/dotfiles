@@ -1,5 +1,17 @@
 #!/bin/bash -e
 
+ignored() {
+    local file="$1"
+    shift
+    if [ ! -f "$HOME/.dotfiles_ignore" ]; then
+        return 1
+    fi
+    if grep -Fqx "$file" "$HOME/.dotfiles_ignore"; then
+        return 0
+    fi
+    return 1
+}
+
 excluded() {
     local excludes=(
         "install.sh"
@@ -21,6 +33,10 @@ sync() {
     local file="$1"
     shift
     if excluded "$file"; then
+        return
+    fi
+    if ignored "$file"; then
+        echo "$file is ignored."
         return
     fi
     if [ ! -e "$HOME/$file" ]; then
