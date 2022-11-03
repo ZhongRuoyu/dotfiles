@@ -8,6 +8,7 @@ excluded() {
     )
     local file="$1"
     shift
+    local exclude
     for exclude in "${excludes[@]}"; do
         if [ "$file" = "$exclude" ]; then
             return 0
@@ -22,6 +23,7 @@ install() {
     if excluded "$file"; then
         return
     fi
+    local input
     if [ -e "$HOME/$file" ]; then
         if [ ! -f "$HOME/$file" ]; then
             echo "Warning: $HOME/$file is not a regular file; skipped"

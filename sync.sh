@@ -8,6 +8,7 @@ excluded() {
     )
     local file="$1"
     shift
+    local exclude
     for exclude in "${excludes[@]}"; do
         if [ "$file" = "$exclude" ]; then
             return 0
