@@ -63,10 +63,6 @@ export CPATH="$HOME/local/include${CPATH:+:$CPATH}"
 export LIBRARY_PATH="$HOME/local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 
 
-# Java
-export CLASSPATH="$HOME/local/java/lib/*${CLASSPATH:+:$CLASSPATH}"
-
-
 # Conda
 conda_aliases=(
     conda
