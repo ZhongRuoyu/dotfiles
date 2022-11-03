@@ -47,14 +47,6 @@ tar() {
 }
 
 
-# Local settings
-export PATH="${PATH:+$PATH:}$HOME/local/bin"
-export MANPATH=":${MANPATH:+$MANPATH:}$HOME/local/share/man"
-export INFOPATH=":${INFOPATH:+$INFOPATH:}$HOME/local/share/info"
-export CPATH="${CPATH:+$CPATH:}$HOME/local/include"
-export LIBRARY_PATH="${LIBRARY_PATH:+$LIBRARY_PATH:}$HOME/local/lib"
-
-
 # Homebrew
 if [ -e "$HOME/opt/homebrew/bin/brew" ]; then
     eval "$("$HOME/opt/homebrew/bin/brew" shellenv)"
@@ -63,8 +55,16 @@ if [ -e "$HOME/opt/homebrew/bin/brew" ]; then
 fi
 
 
+# Local settings
+export PATH="$HOME/local/bin${PATH:+:$PATH}"
+export MANPATH="$HOME/local/share/man${MANPATH:+:$MANPATH}:"
+export INFOPATH="$HOME/local/share/info${INFOPATH:+:$INFOPATH}:"
+export CPATH="$HOME/local/include${CPATH:+:$CPATH}"
+export LIBRARY_PATH="$HOME/local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+
+
 # Java
-export CLASSPATH="${CLASSPATH:+$CLASSPATH:}$HOME/local/java/lib/*"
+export CLASSPATH="$HOME/local/java/lib/*${CLASSPATH:+:$CLASSPATH}"
 
 
 # Conda
