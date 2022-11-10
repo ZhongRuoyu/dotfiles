@@ -2,8 +2,7 @@
 
 ignored() {
     local file="$1"
-    shift
-    if [ ! -f "$HOME/.dotfiles_ignore" ]; then
+    if [[ ! -f "$HOME/.dotfiles_ignore" ]]; then
         return 1
     fi
     if grep -Fqx "$file" "$HOME/.dotfiles_ignore"; then
@@ -19,10 +18,9 @@ excluded() {
         "LICENSE"
     )
     local file="$1"
-    shift
     local exclude
     for exclude in "${excludes[@]}"; do
-        if [ "$file" = "$exclude" ]; then
+        if [[ "$file" = "$exclude" ]]; then
             return 0
         fi
     done
@@ -31,7 +29,6 @@ excluded() {
 
 install() {
     local file="$1"
-    shift
     if excluded "$file"; then
         return
     fi
@@ -40,8 +37,8 @@ install() {
         return
     fi
     local input
-    if [ -e "$HOME/$file" ]; then
-        if [ ! -f "$HOME/$file" ]; then
+    if [[ -e "$HOME/$file" ]]; then
+        if [[ ! -f "$HOME/$file" ]]; then
             echo "Warning: $HOME/$file is not a regular file; skipped"
             return
         fi
@@ -53,7 +50,7 @@ install() {
             read -p "$HOME/$file already exists; overwrite? [y/N/diff] " input
             case "$input" in
             [Yy]*) break ;;
-            diff) diff "$file" "$HOME/$file" | ${PAGER:-less} ;;
+            [Dd]*) diff "$file" "$HOME/$file" | ${PAGER:-less} ;;
             *) return ;;
             esac
         done

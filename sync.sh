@@ -2,8 +2,7 @@
 
 ignored() {
     local file="$1"
-    shift
-    if [ ! -f "$HOME/.dotfiles_ignore" ]; then
+    if [[ ! -f "$HOME/.dotfiles_ignore" ]]; then
         return 1
     fi
     if grep -Fqx "$file" "$HOME/.dotfiles_ignore"; then
@@ -19,10 +18,9 @@ excluded() {
         "LICENSE"
     )
     local file="$1"
-    shift
     local exclude
     for exclude in "${excludes[@]}"; do
-        if [ "$file" = "$exclude" ]; then
+        if [[ "$file" = "$exclude" ]]; then
             return 0
         fi
     done
@@ -31,7 +29,6 @@ excluded() {
 
 sync() {
     local file="$1"
-    shift
     if excluded "$file"; then
         return
     fi
@@ -39,11 +36,11 @@ sync() {
         echo "$file is ignored."
         return
     fi
-    if [ ! -e "$HOME/$file" ]; then
+    if [[ ! -e "$HOME/$file" ]]; then
         echo "Warning: $HOME/$file does not exist; skipped"
         return
     fi
-    if [ ! -f "$HOME/$file" ]; then
+    if [[ ! -f "$HOME/$file" ]]; then
         echo "Warning: $HOME/$file is not a regular file; skipped"
         return
     fi
