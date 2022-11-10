@@ -28,7 +28,7 @@ setopt HIST_IGNORE_SPACE
 
 
 # Local zsh settings
-if [ -e "$HOME/.zshrc.local" ]; then
+if [[ -e "$HOME/.zshrc.local" ]]; then
     source "$HOME/.zshrc.local"
 fi
 

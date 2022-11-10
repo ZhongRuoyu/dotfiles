@@ -11,7 +11,7 @@ fi
 
 
 # Local zsh profile
-if [ -e "$HOME/.zprofile.local" ]; then
+if [[ -e "$HOME/.zprofile.local" ]]; then
     source "$HOME/.zprofile.local"
 fi
 
