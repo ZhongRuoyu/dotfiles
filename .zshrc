@@ -4,7 +4,6 @@ plugins=(
     brew
     docker
     docker-compose
-    gh
     git
     golang
     httpie
@@ -12,6 +11,7 @@ plugins=(
     npm
     nvm
     pip
+    python
     rust
     ubuntu
 )
