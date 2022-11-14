@@ -16,3 +16,6 @@
 [url "git@gitlab.com:"]
 	insteadOf = git://gitlab.com/
 	insteadOf = https://gitlab.com/
+[url "git@bitbucket.org:"]
+	insteadOf = git://bitbucket.org/
+	insteadOf = https://bitbucket.org/
