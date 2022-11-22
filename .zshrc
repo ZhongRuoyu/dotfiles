@@ -14,6 +14,7 @@ plugins=(
     python
     rust
     ubuntu
+    zsh-autosuggestions
 )
 source "$ZSH/oh-my-zsh.sh"
 
