@@ -6,8 +6,6 @@
 	excludesFile = ~/.gitignore_global
 [init]
 	defaultBranch = main
-[pull]
-	ff = only
 [commit]
 	gpgSign = true
 [tag]
