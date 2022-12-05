@@ -2,6 +2,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 plugins=(
     brew
+    conda-zsh-completion
     docker
     docker-compose
     git
