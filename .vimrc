@@ -18,9 +18,9 @@ set whichwrap=b,s,<,>,[,]
 " https://stackoverflow.com/q/1878974
 set autoindent
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 set softtabstop=0
-set tabstop=4
+set tabstop=2
 set smartindent
 set smarttab
 " editing

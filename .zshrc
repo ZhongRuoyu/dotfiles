@@ -1,22 +1,22 @@
 # oh-my-zsh settings
 export ZSH="$HOME/.oh-my-zsh"
 plugins=(
-    brew
-    conda-zsh-completion
-    docker
-    docker-compose
-    git
-    golang
-    httpie
-    macos
-    npm
-    nvm
-    pip
-    python
-    rust
-    ubuntu
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+  brew
+  conda-zsh-completion
+  docker
+  docker-compose
+  git
+  golang
+  httpie
+  macos
+  npm
+  nvm
+  pip
+  python
+  rust
+  ubuntu
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 source "$ZSH/oh-my-zsh.sh"
 
@@ -32,7 +32,7 @@ setopt HIST_IGNORE_SPACE
 
 # Local zsh settings
 if [[ -e "$HOME/.zshrc.local" ]]; then
-    source "$HOME/.zshrc.local"
+  source "$HOME/.zshrc.local"
 fi
 
 

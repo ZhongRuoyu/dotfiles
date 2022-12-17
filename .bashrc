@@ -8,7 +8,7 @@ HISTCONTROL=ignoreboth
 
 # Local bash settings
 if [[ -e "$HOME/.bashrc.local" ]]; then
-    source "$HOME/.bashrc.local"
+  source "$HOME/.bashrc.local"
 fi
 
 
