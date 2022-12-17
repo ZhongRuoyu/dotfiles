@@ -51,7 +51,10 @@ sync() {
   cp -v "$HOME/$file" "$file"
 }
 
-files=($(git ls-tree --full-tree --name-only -r HEAD))
+files=()
+while IFS='' read -r line; do
+  files+=("$line")
+done < <(git ls-tree --full-tree --name-only -r HEAD)
 
 for file in "${files[@]}"; do
   sync "$file"

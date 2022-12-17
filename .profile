@@ -1,3 +1,5 @@
+# shellcheck disable=SC2148
+
 # Locale
 export LANG=en_GB.UTF-8
 export LC_COLLATE=POSIX
@@ -27,7 +29,7 @@ alias grep="grep --color=auto"
 # rm
 rm() {
   echo "use \`command rm' instead:" >&2
-  echo "command rm $@" >&2
+  echo "command rm $*" >&2
   return 1
 }
 
@@ -36,8 +38,9 @@ alias sudo="sudo "
 
 # tar
 tar() {
+  local options
   if [ "$#" -ge 1 ]; then
-    local options="$1"
+    options="$1"
     if [ "${options:0:1}" != "-" ]; then
       options="-$options"
     fi
@@ -85,6 +88,7 @@ install_conda_aliases() {
   unset -f install_conda_aliases
   local conda_alias
   for conda_alias in "${conda_aliases[@]}"; do
+    # shellcheck disable=SC2139
     alias "$conda_alias"="load_conda && $conda_alias"
   done
 }
@@ -97,9 +101,11 @@ uninstall_conda_aliases() {
 }
 load_conda() {
   unset -f load_conda
+  local shell
+  local conda_setup
   uninstall_conda_aliases
-  local shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
-  local conda_setup="$("$HOME/opt/miniforge3/bin/conda" "shell.$shell" hook)"
+  shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
+  conda_setup="$("$HOME/opt/miniforge3/bin/conda" "shell.$shell" hook)"
   eval "$conda_setup"
   conda activate default
 }
@@ -117,6 +123,7 @@ install_nvm_aliases() {
   unset -f install_nvm_aliases
   local nvm_alias
   for nvm_alias in "${nvm_aliases[@]}"; do
+    # shellcheck disable=SC2139
     alias "$nvm_alias"="load_nvm && $nvm_alias"
   done
 }
@@ -131,7 +138,9 @@ load_nvm() {
   unset -f load_nvm
   uninstall_nvm_aliases
   export NVM_DIR="$HOME/.nvm"
+  # shellcheck source=/dev/null
   source "$NVM_DIR/nvm.sh"
+  # shellcheck source=/dev/null
   source "$NVM_DIR/bash_completion"
 }
 install_nvm_aliases
@@ -147,6 +156,7 @@ fi
 
 # Local profile settings
 if [ -e "$HOME/.profile.local" ]; then
+  # shellcheck source=/dev/null
   source "$HOME/.profile.local"
 fi
 

@@ -47,7 +47,8 @@ install() {
       return
     fi
     while true; do
-      read -p "$HOME/$file already exists; overwrite? [y/N/diff] " input
+      echo -n "$HOME/$file already exists; overwrite? [y/N/diff] "
+      read -r input
       case "$input" in
       [Yy]*) break ;;
       [Dd]*) diff "$file" "$HOME/$file" | ${PAGER:-less} ;;
@@ -55,7 +56,8 @@ install() {
       esac
     done
   else
-    read -p "Install $file to $HOME/$file? [y/N] " input
+    echo -n "Install $file to $HOME/$file? [y/N] "
+    read -r input
     case "$input" in
     [Yy]*) ;;
     *) return ;;
@@ -65,7 +67,10 @@ install() {
   cp -v "$file" "$HOME/$file"
 }
 
-files=($(git ls-tree --full-tree --name-only -r HEAD))
+files=()
+while IFS='' read -r line; do
+  files+=("$line")
+done < <(git ls-tree --full-tree --name-only -r HEAD)
 
 for file in "${files[@]}"; do
   install "$file"
