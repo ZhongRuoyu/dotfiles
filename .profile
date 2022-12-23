@@ -1,14 +1,5 @@
 # shellcheck disable=SC2148
 
-# Locale
-export LANG=en_GB.UTF-8
-export LC_COLLATE=POSIX
-export LC_CTYPE=UTF-8
-export LC_MESSAGES=POSIX
-export LC_MONETARY=POSIX
-export LC_NUMERIC=POSIX
-export LC_TIME=POSIX
-
 # Default programs
 export EDITOR=vim
 export PAGER=less
