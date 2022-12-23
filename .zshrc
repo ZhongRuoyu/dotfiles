@@ -1,7 +1,8 @@
-# shellcheck shell=zsh
+# shellcheck disable=SC2148
 
 # oh-my-zsh settings
 export ZSH="$HOME/.oh-my-zsh"
+# shellcheck disable=SC2034
 plugins=(
   brew
   conda-zsh-completion
