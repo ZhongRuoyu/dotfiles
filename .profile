@@ -17,13 +17,6 @@ alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias grep="grep --color=auto"
 
-# rm
-rm() {
-  echo "use \`command rm' instead:" >&2
-  echo "command rm $*" >&2
-  return 1
-}
-
 # sudo
 alias sudo="sudo "
 
