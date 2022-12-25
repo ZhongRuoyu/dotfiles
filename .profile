@@ -39,6 +39,12 @@ if [ -e "$HOME/opt/homebrew/bin/brew" ]; then
   export LIBRARY_PATH="$HOME/opt/homebrew/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 fi
 
+# GPG
+if [ -t 1 ]; then
+  GPG_TTY="$(tty)"
+  export GPG_TTY
+fi
+
 # Keychain
 if [ -e "$HOME/opt/keychain/keychain" ]; then
   export PATH="$HOME/opt/keychain${PATH:+:$PATH}"
