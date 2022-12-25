@@ -131,9 +131,7 @@ install_nvm_aliases
 
 
 # rbenv
-if type rbenv &>/dev/null; then
-  eval "$(rbenv init -)"
-elif [ -e "$HOME/.rbenv/bin/rbenv" ]; then
+if [ -e "$HOME/.rbenv/bin/rbenv" ]; then
   eval "$("$HOME/.rbenv/bin/rbenv" init -)"
 fi
 
