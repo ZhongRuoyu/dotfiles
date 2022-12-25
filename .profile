@@ -8,9 +8,9 @@ export VISUAL=vim
 
 # ls
 alias ls="ls -G"
-alias ll="ls -alF"
-alias la="ls -A"
-alias l="ls -CF"
+alias l="ls -ahl"
+alias la="ls -Ahl"
+alias ll="ls -hl"
 
 # grep
 alias egrep="egrep --color=auto"
