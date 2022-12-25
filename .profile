@@ -5,7 +5,6 @@ export EDITOR=vim
 export PAGER=less
 export VISUAL=vim
 
-
 # ls
 alias ls="ls -G"
 alias l="ls -ahl"
@@ -33,7 +32,6 @@ tar() {
   COPYFILE_DISABLE=1 command tar --exclude=.DS_Store "$@"
 }
 
-
 # Homebrew
 if [ -e "$HOME/opt/homebrew/bin/brew" ]; then
   eval "$("$HOME/opt/homebrew/bin/brew" shellenv)"
@@ -41,13 +39,11 @@ if [ -e "$HOME/opt/homebrew/bin/brew" ]; then
   export LIBRARY_PATH="$HOME/opt/homebrew/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 fi
 
-
 # Keychain
 if [ -e "$HOME/opt/keychain/keychain" ]; then
   export PATH="$HOME/opt/keychain${PATH:+:$PATH}"
   eval "$(keychain --eval --noask --quiet)"
 fi
-
 
 # Local settings
 export PATH="$HOME/local/bin${PATH:+:$PATH}"
@@ -55,7 +51,6 @@ export MANPATH="$HOME/local/share/man${MANPATH:+:$MANPATH}:"
 export INFOPATH="$HOME/local/share/info${INFOPATH:+:$INFOPATH}:"
 export CPATH="$HOME/local/include${CPATH:+:$CPATH}"
 export LIBRARY_PATH="$HOME/local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
-
 
 # Conda
 conda_aliases=(
@@ -95,7 +90,6 @@ load_conda() {
 }
 install_conda_aliases
 
-
 # nvm
 nvm_aliases=(
   nvm
@@ -129,17 +123,13 @@ load_nvm() {
 }
 install_nvm_aliases
 
-
 # rbenv
 if [ -e "$HOME/.rbenv/bin/rbenv" ]; then
   eval "$("$HOME/.rbenv/bin/rbenv" init -)"
 fi
-
 
 # Local profile settings
 if [ -e "$HOME/.profile.local" ]; then
   # shellcheck source=/dev/null
   source "$HOME/.profile.local"
 fi
-
-
