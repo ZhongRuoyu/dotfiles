@@ -31,6 +31,13 @@ PS1="[%n@%m %1~]%(!.#.$) "
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 
+# Homebrew completions
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions${FPATH:+:$FPATH}"
+  autoload -Uz compinit
+  compinit
+fi
+
 # Local zsh settings
 if [[ -e "$HOME/.zshrc.local" ]]; then
   # shellcheck source=/dev/null
