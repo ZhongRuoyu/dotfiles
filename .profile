@@ -36,7 +36,7 @@ tar() {
   if [ "$#" -ge 1 ] && [ "${1:0:1}" != "-" ]; then
     set -- "-$1" "${@:2}"
   fi
-  tar --exclude='.DS_Store' --exclude='._*' "$@"
+  command tar --exclude='.DS_Store' --exclude='._*' "$@"
 }
 
 # Homebrew
