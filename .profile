@@ -31,17 +31,12 @@ alias ls="ls --color=auto"
 # Allow alias substitution after sudo
 alias sudo="sudo "
 
-# tar
+# Let tar ignore .DS_Store and ._ files
 tar() {
-  local options
-  if [ "$#" -ge 1 ]; then
-    options="$1"
-    if [ "${options:0:1}" != "-" ]; then
-      options="-$options"
-    fi
-    set -- "$options" "${@:2}"
+  if [ "$#" -ge 1 ] && [ "${1:0:1}" != "-" ]; then
+    set -- "-$1" "${@:2}"
   fi
-  COPYFILE_DISABLE=1 command tar --exclude=.DS_Store "$@"
+  tar --exclude='.DS_Store' --exclude='._*' "$@"
 }
 
 # Homebrew
@@ -98,9 +93,9 @@ uninstall_conda_aliases() {
 }
 load_conda() {
   unset -f load_conda
+  uninstall_conda_aliases
   local shell
   local conda_setup
-  uninstall_conda_aliases
   shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
   conda_setup="$("$HOME/opt/miniforge3/bin/conda" "shell.$shell" hook)"
   eval "$conda_setup"
@@ -110,10 +105,10 @@ install_conda_aliases
 
 # nvm
 nvm_aliases=(
-  nvm
   node
   npm
   npx
+  nvm
 )
 install_nvm_aliases() {
   unset -f install_nvm_aliases
