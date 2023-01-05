@@ -24,18 +24,11 @@ export EDITOR=vim
 export PAGER=less
 export VISUAL=vim
 
-# ls
-alias ls="ls -G"
-alias l="ls -ahl"
-alias la="ls -Ahl"
-alias ll="ls -hl"
-
-# grep
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
+# Enable colorized output
 alias grep="grep --color=auto"
+alias ls="ls --color=auto"
 
-# sudo
+# Allow alias substitution after sudo
 alias sudo="sudo "
 
 # tar
