@@ -1,5 +1,24 @@
 # shellcheck disable=SC2148
 
+# Locale
+set_locale() {
+  unset -f set_locale
+  local locale_candidates=(
+    "en_US.UTF-8" "en_US.utf8" "en_US"
+    "C.UTF-8" "C.utf8" "C"
+  )
+  local all_locales
+  all_locales="$(locale -a)"
+  local locale_candidate
+  for locale_candidate in "${locale_candidates[@]}"; do
+    if echo "$all_locales" | grep -Fqx "$locale_candidate"; then
+      export LC_ALL="$locale_candidate"
+      break
+    fi
+  done
+}
+set_locale
+
 # Default programs
 export EDITOR=vim
 export PAGER=less
