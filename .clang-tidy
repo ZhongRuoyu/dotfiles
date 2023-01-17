@@ -1,15 +1,19 @@
 ---
 Checks: |
   bugprone-*
+  -bugprone-easily-swappable-parameters
   clang-analyzer-*
   concurrency-*
-  cppcoreguidelines-*
   google-*
   modernize-*
+  -modernize-avoid-c-arrays
   -modernize-use-trailing-return-type
   performance-*
   portability-*
   readability-*
+  -readability-function-cognitive-complexity
+  -readability-identifier-length
+  -readability-magic-numbers
 CheckOptions:
   - key: readability-identifier-naming.IgnoreMainLikeFunctions
     value: 1
