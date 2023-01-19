@@ -7,15 +7,11 @@ plugins=(
   # oh-my-zsh plugins
   brew
   docker
-  docker-compose
   git
   golang
-  gradle
   macos
   npm
-  nvm
   pip
-  python
   rust
   ubuntu
   # custom plugins
