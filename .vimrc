@@ -6,7 +6,6 @@ syntax enable
 
 " https://vimhelp.org/options.txt.html
 " display
-set colorcolumn=81,121
 set linebreak
 set number
 set ruler
@@ -25,8 +24,3 @@ set tabstop=2
 " navigation
 set scrolloff=5
 set whichwrap+=<,>,[,]
-
-" https://vimhelp.org/autocmd.txt.html
-" overrides
-autocmd FileType gitcommit
-  \ setlocal colorcolumn=51,73
