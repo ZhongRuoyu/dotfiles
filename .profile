@@ -44,6 +44,7 @@ if [ -e "$HOME/opt/homebrew/bin/brew" ]; then
   eval "$("$HOME/opt/homebrew/bin/brew" shellenv)"
   export CPATH="$HOME/opt/homebrew/include${CPATH:+:$CPATH}"
   export LIBRARY_PATH="$HOME/opt/homebrew/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+  export HOMEBREW_NO_INSTALL_FROM_API=1
 fi
 
 # GPG
