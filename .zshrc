@@ -5,18 +5,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # shellcheck disable=SC2034
 plugins=(
   # oh-my-zsh plugins
-  brew
   docker
   git
-  golang
-  macos
-  npm
   pip
-  rust
-  ubuntu
   # custom plugins
   conda-zsh-completion
   zsh-autosuggestions
+  zsh-completions
   zsh-syntax-highlighting
 )
 # shellcheck source=/dev/null
