@@ -66,6 +66,12 @@ if [ -e "$HOME/opt/keychain/keychain" ]; then
   eval "$(keychain --eval --noask --quiet)"
 fi
 
+# rustup
+if [ -e "$HOME/.cargo/env" ]; then
+  # shellcheck source=/dev/null
+  source "$HOME/.cargo/env"
+fi
+
 # Conda
 conda_aliases=(
   conda
