@@ -60,20 +60,24 @@ install() {
         echo -n "$destination/$file already exists; overwrite? [y/N/diff] "
         read -r input
         case "$input" in
-        [Yy]*) break ;;
-        [Dd]*) diff "$file" "$destination/$file" | ${PAGER:-less} ;;
-        *) return ;;
+        [Yy]) break ;;
+        [Nn] | "") return ;;
+        [Dd] | [Dd][Ii][Ff][Ff]) diff "$file" "$destination/$file" | ${PAGER:-less} ;;
+        *) echo "Please enter a valid option." ;;
         esac
       done
     fi
   else
     if [[ -n "$interactive" ]]; then
-      echo -n "Install $file to $destination/$file? [y/N] "
-      read -r input
-      case "$input" in
-      [Yy]*) ;;
-      *) return ;;
-      esac
+      while true; do
+        echo -n "Install $file to $destination/$file? [y/N] "
+        read -r input
+        case "$input" in
+        [Yy]) break ;;
+        [Nn] | "") return ;;
+        *) echo "Please enter a valid option." ;;
+        esac
+      done
     fi
   fi
   mkdir -p "$(dirname "$destination/$file")"
