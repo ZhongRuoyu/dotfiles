@@ -1,11 +1,25 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -e
+
+source="$HOME"
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [options] file...
+
+Options:
+  -h, --help            Display this help text
+  -s, --source          Set source directory (default: $HOME)
+EOF
+}
 
 ignored() {
   local file="$1"
-  if [[ ! -f "$HOME/.dotfiles_ignore" ]]; then
+  if [[ ! -f "$source/.dotfiles_ignore" ]]; then
     return 1
   fi
-  if grep -Fqx "$file" "$HOME/.dotfiles_ignore"; then
+  if grep -Fqx "$file" "$source/.dotfiles_ignore"; then
     return 0
   fi
   return 1
@@ -29,32 +43,56 @@ excluded() {
 
 sync() {
   local file="$1"
-  if excluded "$file"; then
+  if [[ ! -f "$source/$file" ]]; then
+    echo "Warning: $source/$file is not a regular file; skipped"
     return
   fi
-  if ignored "$file"; then
-    echo "$file is ignored."
-    return
-  fi
-  if [[ ! -e "$HOME/$file" ]]; then
-    echo "Warning: $HOME/$file does not exist; skipped"
-    return
-  fi
-  if [[ ! -f "$HOME/$file" ]]; then
-    echo "Warning: $HOME/$file is not a regular file; skipped"
-    return
-  fi
-  if cmp -s "$file" "$HOME/$file"; then
+  if cmp -s "$file" "$source/$file"; then
     echo "$file is up to date."
     return
   fi
-  cp -v "$HOME/$file" "$file"
+  cp -v "$source/$file" "$file"
 }
 
 files=()
-while IFS='' read -r line; do
-  files+=("$line")
-done < <(git ls-tree --full-tree --name-only -r HEAD)
+while [[ "$#" -ge 1 ]]; do
+  case "$1" in
+  "-h" | "--help")
+    usage
+    exit 0
+    ;;
+  "-s" | "--source")
+    source="$1"
+    shift
+    ;;
+  "--")
+    files+=("$@")
+    shift "$#"
+    ;;
+  *)
+    files+=("$1")
+    shift
+    ;;
+  esac
+done
+
+if [[ ! -e "$source" ]]; then
+  echo "Error: source directory $source does not exist." >&2
+  exit 1
+fi
+
+if [[ "${#files[@]}" -eq 0 ]]; then
+  while IFS="" read -r file; do
+    if excluded "$file"; then
+      continue
+    fi
+    if ignored "$file"; then
+      echo "Note: $file is ignored."
+      continue
+    fi
+    files+=("$file")
+  done < <(git ls-tree --full-tree --name-only -r HEAD)
+fi
 
 for file in "${files[@]}"; do
   sync "$file"

@@ -1,11 +1,27 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -e
+
+interactive=""
+destination="$HOME"
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [options] file...
+
+Options:
+  -h, --help            Display this help text
+  -d, --destination     Set destination directory (default: $HOME)
+  -i, --interactive     Prompt before each file write
+EOF
+}
 
 ignored() {
   local file="$1"
-  if [[ ! -f "$HOME/.dotfiles_ignore" ]]; then
+  if [[ ! -f "$destination/.dotfiles_ignore" ]]; then
     return 1
   fi
-  if grep -Fqx "$file" "$HOME/.dotfiles_ignore"; then
+  if grep -Fqx "$file" "$destination/.dotfiles_ignore"; then
     return 0
   fi
   return 1
@@ -29,48 +45,90 @@ excluded() {
 
 install() {
   local file="$1"
-  if excluded "$file"; then
-    return
-  fi
-  if ignored "$file"; then
-    echo "$file is ignored."
-    return
-  fi
   local input
-  if [[ -e "$HOME/$file" ]]; then
-    if [[ ! -f "$HOME/$file" ]]; then
-      echo "Warning: $HOME/$file is not a regular file; skipped"
+  if [[ -e "$destination/$file" ]]; then
+    if [[ ! -f "$destination/$file" ]]; then
+      echo "Warning: $destination/$file is not a regular file; skipped"
       return
     fi
-    if cmp -s "$file" "$HOME/$file"; then
+    if cmp -s "$file" "$destination/$file"; then
       echo "$file is up to date."
       return
     fi
-    while true; do
-      echo -n "$HOME/$file already exists; overwrite? [y/N/diff] "
+    if [[ -n "$interactive" ]]; then
+      while true; do
+        echo -n "$destination/$file already exists; overwrite? [y/N/diff] "
+        read -r input
+        case "$input" in
+        [Yy]*) break ;;
+        [Dd]*) diff "$file" "$destination/$file" | ${PAGER:-less} ;;
+        *) return ;;
+        esac
+      done
+    fi
+  else
+    if [[ -n "$interactive" ]]; then
+      echo -n "Install $file to $destination/$file? [y/N] "
       read -r input
       case "$input" in
-      [Yy]*) break ;;
-      [Dd]*) diff "$file" "$HOME/$file" | ${PAGER:-less} ;;
+      [Yy]*) ;;
       *) return ;;
       esac
-    done
-  else
-    echo -n "Install $file to $HOME/$file? [y/N] "
-    read -r input
-    case "$input" in
-    [Yy]*) ;;
-    *) return ;;
-    esac
+    fi
   fi
-  mkdir -p "$(dirname "$HOME/$file")"
-  cp -v "$file" "$HOME/$file"
+  mkdir -p "$(dirname "$destination/$file")"
+  cp -v "$file" "$destination/$file"
 }
 
 files=()
-while IFS='' read -r line; do
-  files+=("$line")
-done < <(git ls-tree --full-tree --name-only -r HEAD)
+while [[ "$#" -ge 1 ]]; do
+  case "$1" in
+  "-h" | "--help")
+    usage
+    exit 0
+    ;;
+  "-d" | "--destination")
+    destination="$1"
+    shift
+    ;;
+  "-i" | "--interactive")
+    interactive="$1"
+    shift
+    ;;
+  "--")
+    files+=("$@")
+    shift "$#"
+    ;;
+  *)
+    files+=("$1")
+    shift
+    ;;
+  esac
+done
+
+if [[ ! -e "$destination" ]]; then
+  echo "Error: destination directory $destination does not exist." >&2
+  exit 1
+fi
+for file in "${files[@]}"; do
+  if [[ ! -e "$file" ]]; then
+    echo "Error: file $file does not exist." >&2
+    exit 1
+  fi
+done
+
+if [[ "${#files[@]}" -eq 0 ]]; then
+  while IFS="" read -r file; do
+    if excluded "$file"; then
+      continue
+    fi
+    if ignored "$file"; then
+      echo "Note: $file is ignored."
+      continue
+    fi
+    files+=("$file")
+  done < <(git ls-tree --full-tree --name-only -r HEAD)
+fi
 
 for file in "${files[@]}"; do
   install "$file"
