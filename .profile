@@ -47,6 +47,13 @@ if [ -e "$HOME/opt/homebrew/bin/brew" ]; then
   export HOMEBREW_NO_INSTALL_FROM_API=1
 fi
 
+# Local settings
+export PATH="$HOME/local/bin${PATH:+:$PATH}"
+export MANPATH="$HOME/local/share/man${MANPATH:+:$MANPATH}:"
+export INFOPATH="$HOME/local/share/info${INFOPATH:+:$INFOPATH}:"
+export CPATH="$HOME/local/include${CPATH:+:$CPATH}"
+export LIBRARY_PATH="$HOME/local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+
 # GPG
 if [ -t 1 ]; then
   GPG_TTY="$(tty)"
@@ -58,13 +65,6 @@ if [ -e "$HOME/opt/keychain/keychain" ]; then
   export PATH="$HOME/opt/keychain${PATH:+:$PATH}"
   eval "$(keychain --eval --noask --quiet)"
 fi
-
-# Local settings
-export PATH="$HOME/local/bin${PATH:+:$PATH}"
-export MANPATH="$HOME/local/share/man${MANPATH:+:$MANPATH}:"
-export INFOPATH="$HOME/local/share/info${INFOPATH:+:$INFOPATH}:"
-export CPATH="$HOME/local/include${CPATH:+:$CPATH}"
-export LIBRARY_PATH="$HOME/local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 
 # Conda
 conda_aliases=(
