@@ -1,5 +1,10 @@
 # shellcheck disable=SC2148
 
+# Homebrew completions
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
+  FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions${FPATH:+:$FPATH}"
+fi
+
 # oh-my-zsh settings
 export ZSH="$HOME/.oh-my-zsh"
 # shellcheck disable=SC2034
@@ -23,13 +28,6 @@ PS1="[%n@%m %1~]%(!.#.$) "
 # History control
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
-
-# Homebrew completions
-if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions${FPATH:+:$FPATH}"
-  autoload -Uz compinit
-  compinit
-fi
 
 # Local zsh settings
 if [[ -e "$HOME/.zshrc.local" ]]; then

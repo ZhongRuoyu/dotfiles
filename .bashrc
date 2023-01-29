@@ -9,15 +9,8 @@ elif [[ -f /etc/bash_completion ]]; then
   source /etc/bash_completion
 fi
 
-# Prompt settings
-PS1="[\u@\h \W]\\$ "
-
-# History control
-HISTCONTROL=ignoreboth
-
 # Homebrew completions
-if type brew &>/dev/null; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
   if [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]]; then
     # shellcheck source=/dev/null
     source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
@@ -28,6 +21,12 @@ if type brew &>/dev/null; then
     done
   fi
 fi
+
+# Prompt settings
+PS1="[\u@\h \W]\\$ "
+
+# History control
+HISTCONTROL=ignoreboth
 
 # Local bash settings
 if [[ -e "$HOME/.bashrc.local" ]]; then
