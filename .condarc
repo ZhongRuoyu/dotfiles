@@ -1,3 +1,4 @@
-auto_activate_base: false
-changeps1: false
-channels: [conda-forge]
+auto_activate_base: False
+changeps1: False
+channels:
+  - conda-forge
