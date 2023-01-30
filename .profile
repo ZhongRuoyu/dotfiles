@@ -2,7 +2,6 @@
 
 # Locale
 set_locale() {
-  unset -f set_locale
   local locale_candidates=(
     "en_US.UTF-8" "en_US.utf8" "en_US"
     "C.UTF-8" "C.utf8" "C"
@@ -84,7 +83,6 @@ conda_aliases=(
   wheel wheel3
 )
 install_conda_aliases() {
-  unset -f install_conda_aliases
   local conda_alias
   for conda_alias in "${conda_aliases[@]}"; do
     # shellcheck disable=SC2139
@@ -92,7 +90,6 @@ install_conda_aliases() {
   done
 }
 uninstall_conda_aliases() {
-  unset -f uninstall_conda_aliases
   local conda_alias
   for conda_alias in "${conda_aliases[@]}"; do
     if alias "$conda_alias" &>/dev/null; then
@@ -101,10 +98,9 @@ uninstall_conda_aliases() {
   done
 }
 load_conda() {
-  unset -f load_conda
-  uninstall_conda_aliases
   local shell
   local conda_setup
+  uninstall_conda_aliases
   shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
   conda_setup="$("$HOME/opt/miniforge3/bin/conda" "shell.$shell" hook)"
   eval "$conda_setup"
@@ -120,7 +116,6 @@ nvm_aliases=(
   nvm
 )
 install_nvm_aliases() {
-  unset -f install_nvm_aliases
   local nvm_alias
   for nvm_alias in "${nvm_aliases[@]}"; do
     # shellcheck disable=SC2139
@@ -128,7 +123,6 @@ install_nvm_aliases() {
   done
 }
 uninstall_nvm_aliases() {
-  unset -f uninstall_nvm_aliases
   local nvm_alias
   for nvm_alias in "${nvm_aliases[@]}"; do
     if alias "$nvm_alias" &>/dev/null; then
@@ -137,7 +131,6 @@ uninstall_nvm_aliases() {
   done
 }
 load_nvm() {
-  unset -f load_nvm
   uninstall_nvm_aliases
   export NVM_DIR="$HOME/.nvm"
   # shellcheck source=/dev/null
