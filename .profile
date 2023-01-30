@@ -95,7 +95,9 @@ uninstall_conda_aliases() {
   unset -f uninstall_conda_aliases
   local conda_alias
   for conda_alias in "${conda_aliases[@]}"; do
-    unalias "$conda_alias" || true
+    if alias "$conda_alias" &>/dev/null; then
+      unalias "$conda_alias"
+    fi
   done
 }
 load_conda() {
@@ -129,7 +131,9 @@ uninstall_nvm_aliases() {
   unset -f uninstall_nvm_aliases
   local nvm_alias
   for nvm_alias in "${nvm_aliases[@]}"; do
-    unalias "$nvm_alias" || true
+    if alias "$nvm_alias" &>/dev/null; then
+      unalias "$nvm_alias"
+    fi
   done
 }
 load_nvm() {
