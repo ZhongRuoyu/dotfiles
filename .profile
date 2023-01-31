@@ -86,7 +86,7 @@ install_conda_aliases() {
   local conda_alias
   for conda_alias in "${conda_aliases[@]}"; do
     # shellcheck disable=SC2139
-    alias "$conda_alias"="([ -n \"\$VIRTUAL_ENV\" ] || load_conda) && $conda_alias"
+    alias "$conda_alias"="[ -n \"\$VIRTUAL_ENV\" ] || load_conda && $conda_alias"
   done
 }
 uninstall_conda_aliases() {
