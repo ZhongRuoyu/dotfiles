@@ -7,6 +7,7 @@ fi
 
 # oh-my-zsh settings
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
 # shellcheck disable=SC2034
 plugins=(
   # oh-my-zsh plugins
@@ -16,9 +17,11 @@ plugins=(
   # custom plugins
   conda-zsh-completion
   zsh-autosuggestions
-  zsh-completions
   zsh-syntax-highlighting
 )
+# zsh-completions
+# https://github.com/zsh-users/zsh-completions/issues/603
+FPATH="$ZSH_CUSTOM/plugins/zsh-completions/src${FPATH:+:$FPATH}"
 # shellcheck source=/dev/null
 source "$ZSH/oh-my-zsh.sh"
 
