@@ -74,6 +74,7 @@ fi
 # Conda
 conda_aliases=(
   conda
+  mamba
   2to3
   idle3
   pip pip3
@@ -104,7 +105,13 @@ load_conda() {
   shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
   conda_setup="$("$HOME/opt/miniforge3/bin/conda" "shell.$shell" hook)"
   eval "$conda_setup"
-  conda activate default
+  if [ -e "$HOME/opt/miniforge3/etc/profile.d/mamba.sh" ]; then
+    # shellcheck source=/dev/null
+    source "$HOME/opt/miniforge3/etc/profile.d/mamba.sh"
+    mamba activate default
+  else
+    conda activate default
+  fi
 }
 install_conda_aliases
 
