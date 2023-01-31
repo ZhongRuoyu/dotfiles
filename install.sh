@@ -13,6 +13,7 @@ Options:
   -h, --help            Display this help text
   -d, --destination     Set destination directory (default: $HOME)
   -i, --interactive     Prompt before each file write
+
 EOF
 }
 

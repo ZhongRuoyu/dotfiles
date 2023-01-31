@@ -11,6 +11,7 @@ Usage: $(basename "$0") [options] file...
 Options:
   -h, --help            Display this help text
   -s, --source          Set source directory (default: $HOME)
+
 EOF
 }
 
