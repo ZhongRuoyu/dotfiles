@@ -112,13 +112,9 @@ load_conda() {
   shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
   conda_setup="$("$CONDA_ROOT/bin/conda" "shell.$shell" hook)"
   eval "$conda_setup"
-  if [ -e "$CONDA_ROOT/etc/profile.d/mamba.sh" ]; then
-    # shellcheck source=/dev/null
-    source "$CONDA_ROOT/etc/profile.d/mamba.sh"
-    mamba activate default
-  else
-    conda activate default
-  fi
+  # shellcheck source=/dev/null
+  source "$CONDA_ROOT/etc/profile.d/mamba.sh"
+  mamba activate default
 }
 install_conda_aliases
 
