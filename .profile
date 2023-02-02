@@ -39,12 +39,14 @@ tar() {
 }
 
 # Homebrew
-if [ -e "$HOME/opt/homebrew/bin/brew" ]; then
-  eval "$("$HOME/opt/homebrew/bin/brew" shellenv)"
-  export CPATH="$HOME/opt/homebrew/include${CPATH:+:$CPATH}"
-  export LIBRARY_PATH="$HOME/opt/homebrew/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+load_homebrew() {
+  export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$HOME/opt/homebrew}"
+  eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
+  export CPATH="$HOMEBREW_PREFIX/include${CPATH:+:$CPATH}"
+  export LIBRARY_PATH="$HOMEBREW_PREFIX/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
   export HOMEBREW_NO_INSTALL_FROM_API=1
-fi
+}
+load_homebrew
 
 # Local settings
 export PATH="$HOME/local/bin${PATH:+:$PATH}"
@@ -60,16 +62,20 @@ if [ -t 1 ]; then
 fi
 
 # Keychain
-if [ -e "$HOME/opt/keychain/keychain" ]; then
-  export PATH="$HOME/opt/keychain${PATH:+:$PATH}"
+load_keychain() {
+  export KEYCHAIN_PREFIX="${KEYCHAIN_PREFIX:-$HOME/opt/keychain}"
+  export PATH="$KEYCHAIN_PREFIX${PATH:+:$PATH}"
   eval "$(keychain --eval --noask --quiet)"
-fi
+}
+load_keychain
 
-# rustup
-if [ -e "$HOME/.cargo/env" ]; then
+# cargo
+load_cargo() {
+  export CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
   # shellcheck source=/dev/null
-  source "$HOME/.cargo/env"
-fi
+  source "$CARGO_HOME/env"
+}
+load_cargo
 
 # Conda
 conda_aliases=(
@@ -102,12 +108,13 @@ load_conda() {
   local shell
   local conda_setup
   uninstall_conda_aliases
+  export CONDA_ROOT="${CONDA_ROOT:-$HOME/opt/miniforge3}"
   shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
-  conda_setup="$("$HOME/opt/miniforge3/bin/conda" "shell.$shell" hook)"
+  conda_setup="$("$CONDA_ROOT/bin/conda" "shell.$shell" hook)"
   eval "$conda_setup"
-  if [ -e "$HOME/opt/miniforge3/etc/profile.d/mamba.sh" ]; then
+  if [ -e "$CONDA_ROOT/etc/profile.d/mamba.sh" ]; then
     # shellcheck source=/dev/null
-    source "$HOME/opt/miniforge3/etc/profile.d/mamba.sh"
+    source "$CONDA_ROOT/etc/profile.d/mamba.sh"
     mamba activate default
   else
     conda activate default
@@ -117,10 +124,10 @@ install_conda_aliases
 
 # nvm
 nvm_aliases=(
+  nvm
   node
   npm
   npx
-  nvm
 )
 install_nvm_aliases() {
   local nvm_alias
@@ -139,7 +146,7 @@ uninstall_nvm_aliases() {
 }
 load_nvm() {
   uninstall_nvm_aliases
-  export NVM_DIR="$HOME/.nvm"
+  export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
   # shellcheck source=/dev/null
   source "$NVM_DIR/nvm.sh"
   # shellcheck source=/dev/null
@@ -148,9 +155,11 @@ load_nvm() {
 install_nvm_aliases
 
 # rbenv
-if [ -e "$HOME/.rbenv/bin/rbenv" ]; then
-  eval "$("$HOME/.rbenv/bin/rbenv" init -)"
-fi
+load_rbenv() {
+  export RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
+  eval "$("$RBENV_ROOT/bin/rbenv" init -)"
+}
+load_rbenv
 
 # Local profile settings
 if [ -e "$HOME/.profile.local" ]; then
