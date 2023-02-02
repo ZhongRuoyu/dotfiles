@@ -155,11 +155,43 @@ load_nvm() {
 install_nvm_aliases
 
 # rbenv
+rbenv_aliases=(
+  rbenv
+  bundle
+  bundler
+  erb
+  gem
+  irb
+  racc
+  rake
+  rbs
+  rdbg
+  rdoc
+  ri
+  ruby
+  typeprof
+)
+install_rbenv_aliases() {
+  local rbenv_alias
+  for rbenv_alias in "${rbenv_aliases[@]}"; do
+    # shellcheck disable=SC2139
+    alias "$rbenv_alias"="load_rbenv && $rbenv_alias"
+  done
+}
+uninstall_rbenv_aliases() {
+  local rbenv_alias
+  for rbenv_alias in "${rbenv_aliases[@]}"; do
+    if alias "$rbenv_alias" &>/dev/null; then
+      unalias "$rbenv_alias"
+    fi
+  done
+}
 load_rbenv() {
+  uninstall_rbenv_aliases
   export RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
   eval "$("$RBENV_ROOT/bin/rbenv" init -)"
 }
-load_rbenv
+install_rbenv_aliases
 
 # Local profile settings
 if [ -e "$HOME/.profile.local" ]; then
