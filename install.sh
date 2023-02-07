@@ -2,8 +2,8 @@
 
 set -e
 
-interactive=""
 destination="$HOME"
+interactive=""
 
 usage() {
   cat <<EOF
