@@ -41,7 +41,11 @@ tar() {
 # Homebrew
 load_homebrew() {
   # eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
-  export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$HOME/opt/homebrew}"
+  HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$HOME/opt/homebrew}"
+  if [ ! -e "$HOMEBREW_PREFIX" ]; then
+    return
+  fi
+  export HOMEBREW_PREFIX
   export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
   export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
   export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH:+:$PATH}"
@@ -68,7 +72,11 @@ fi
 
 # Keychain
 load_keychain() {
-  export KEYCHAIN_PREFIX="${KEYCHAIN_PREFIX:-$HOME/opt/keychain}"
+  KEYCHAIN_PREFIX="${KEYCHAIN_PREFIX:-$HOME/opt/keychain}"
+  if [ ! -e "$KEYCHAIN_PREFIX" ]; then
+    return
+  fi
+  export KEYCHAIN_PREFIX
   export PATH="$KEYCHAIN_PREFIX${PATH:+:$PATH}"
   eval "$(keychain --eval --noask --quiet --inherit any)"
 }
@@ -76,7 +84,11 @@ load_keychain
 
 # cargo
 load_cargo() {
-  export CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
+  CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
+  if [ ! -e "$CARGO_HOME" ]; then
+    return
+  fi
+  export CARGO_HOME
   # shellcheck source=/dev/null
   source "$CARGO_HOME/env"
 }
@@ -113,7 +125,11 @@ load_conda() {
   local shell
   local conda_setup
   uninstall_conda_aliases
-  export CONDA_ROOT="${CONDA_ROOT:-$HOME/opt/miniforge3}"
+  CONDA_ROOT="${CONDA_ROOT:-$HOME/opt/miniforge3}"
+  if [ ! -e "$CONDA_ROOT" ]; then
+    return
+  fi
+  export CONDA_ROOT
   shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
   conda_setup="$("$CONDA_ROOT/bin/conda" "shell.$shell" hook)"
   eval "$conda_setup"
@@ -147,7 +163,11 @@ uninstall_nvm_aliases() {
 }
 load_nvm() {
   uninstall_nvm_aliases
-  export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+  NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+  if [ ! -e "$NVM_DIR" ]; then
+    return
+  fi
+  export NVM_DIR
   # shellcheck source=/dev/null
   source "$NVM_DIR/nvm.sh"
   # shellcheck source=/dev/null
@@ -189,7 +209,11 @@ uninstall_rbenv_aliases() {
 }
 load_rbenv() {
   uninstall_rbenv_aliases
-  export RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
+  RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
+  if [ ! -e "$RBENV_ROOT" ]; then
+    return
+  fi
+  export RBENV_ROOT
   eval "$("$RBENV_ROOT/bin/rbenv" init -)"
 }
 install_rbenv_aliases
