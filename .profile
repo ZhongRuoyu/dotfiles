@@ -53,6 +53,7 @@ load_homebrew() {
   export INFOPATH="$HOMEBREW_PREFIX/share/info${INFOPATH:+:$INFOPATH}:"
   export CPATH="$HOMEBREW_PREFIX/include${CPATH:+:$CPATH}"
   export LIBRARY_PATH="$HOMEBREW_PREFIX/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+  export HOMEBREW_DEVELOPER=1
   export HOMEBREW_NO_INSTALL_FROM_API=1
 }
 load_homebrew
