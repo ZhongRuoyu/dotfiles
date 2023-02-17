@@ -70,6 +70,10 @@ export LIBRARY_PATH="$HOME/local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 export SHIMS_LOCAL_PROFILES_PATH="$HOME/opt/shims/profiles"
 export PATH="$HOME/opt/shims/local:$HOME/opt/shims/shims${PATH:+:$PATH}"
 
+# shell-utils
+# https://github.com/ZhongRuoyu/shell-utils
+export PATH="$HOME/opt/shell-utils/bin${PATH:+:$PATH}"
+
 # GPG
 if [ -t 1 ]; then
   GPG_TTY="$(tty)"
