@@ -11,7 +11,6 @@ export ZSH_CUSTOM="$ZSH/custom"
 # shellcheck disable=SC2034
 plugins=(
   # oh-my-zsh plugins
-  docker
   git
   pip
   # custom plugins
