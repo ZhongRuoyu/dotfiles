@@ -65,6 +65,11 @@ export INFOPATH="$HOME/local/share/info${INFOPATH:+:$INFOPATH}:"
 export CPATH="$HOME/local/include${CPATH:+:$CPATH}"
 export LIBRARY_PATH="$HOME/local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 
+# shims
+# https://github.com/ZhongRuoyu/shims
+export SHIMS_LOCAL_PROFILES_PATH="$HOME/opt/shims/profiles"
+export PATH="$HOME/opt/shims/local:$HOME/opt/shims/shims${PATH:+:$PATH}"
+
 # GPG
 if [ -t 1 ]; then
   GPG_TTY="$(tty)"
