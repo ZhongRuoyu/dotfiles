@@ -108,6 +108,17 @@ load_cargo() {
 }
 load_cargo
 
+# opam
+load_opam() {
+  OPAM_HOME="${OPAM_HOME:-$HOME/.opam}"
+  if [ ! -e "$OPAM_HOME" ]; then
+    return
+  fi
+  # shellcheck source=/dev/null
+  source "$OPAM_HOME/opam-init/init.zsh"
+}
+load_opam
+
 # Conda
 conda_aliases=(
   conda
