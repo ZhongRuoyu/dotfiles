@@ -40,19 +40,26 @@ tar() {
 
 # Homebrew
 load_homebrew() {
-  # eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
-  HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$HOME/opt/homebrew}"
+  case "$(uname -s)" in
+  "Darwin")
+    case "$(uname -m)" in
+    "amd64") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}" ;;
+    "x86_64") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/usr/local}" ;;
+    *) return ;;
+    esac
+    ;;
+  "Linux") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}" ;;
+  *) return ;;
+  esac
   if [ ! -e "$HOMEBREW_PREFIX" ]; then
-    return
+    if [ -e "$HOME/opt/homebrew" ]; then
+      HOMEBREW_PREFIX="$HOME/opt/homebrew"
+    else
+      return
+    fi
   fi
   export HOMEBREW_PREFIX
-  export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
-  export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
-  export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH:+:$PATH}"
-  export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH:+:$MANPATH}:"
-  export INFOPATH="$HOMEBREW_PREFIX/share/info${INFOPATH:+:$INFOPATH}:"
-  export CPATH="$HOMEBREW_PREFIX/include${CPATH:+:$CPATH}"
-  export LIBRARY_PATH="$HOMEBREW_PREFIX/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+  eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
   export HOMEBREW_DEVELOPER=1
   export HOMEBREW_NO_INSTALL_FROM_API=1
 }
