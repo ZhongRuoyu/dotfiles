@@ -95,7 +95,11 @@ load_keychain() {
   fi
   export KEYCHAIN_PREFIX
   export PATH="$KEYCHAIN_PREFIX${PATH:+:$PATH}"
-  eval "$(keychain --eval --noask --quiet)"
+  if [ "$(uname -s)" = "Darwin" ]; then
+    eval "$(keychain --eval --noask --quiet --inherit any)"
+  else
+    eval "$(keychain --eval --noask --quiet)"
+  fi
 }
 load_keychain
 
