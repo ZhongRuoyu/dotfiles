@@ -171,12 +171,9 @@ load_conda() {
 }
 install_conda_aliases
 
-# nvm
+# nvm - deprecated
 nvm_aliases=(
   nvm
-  node
-  npm
-  npx
 )
 install_nvm_aliases() {
   local nvm_alias
