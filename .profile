@@ -204,6 +204,41 @@ load_nvm() {
 }
 install_nvm_aliases
 
+# nodenv
+nodenv_aliases=(
+  nodenv
+  corepack
+  node
+  npm
+  npx
+)
+install_nodenv_aliases() {
+  local nodenv_alias
+  for nodenv_alias in "${nodenv_aliases[@]}"; do
+    # shellcheck disable=SC2139
+    alias "$nodenv_alias"="load_nodenv && $nodenv_alias"
+  done
+}
+uninstall_nodenv_aliases() {
+  local nodenv_alias
+  for nodenv_alias in "${nodenv_aliases[@]}"; do
+    if alias "$nodenv_alias" &>/dev/null; then
+      unalias "$nodenv_alias"
+    fi
+  done
+}
+load_nodenv() {
+  uninstall_nodenv_aliases
+  NODENV_ROOT="${NODENV_ROOT:-$HOME/.nodenv}"
+  if [ ! -e "$NODENV_ROOT" ]; then
+    return
+  fi
+  export NODENV_ROOT
+  export PATH="$NODENV_ROOT/bin${PATH:+:$PATH}"
+  eval "$("$NODENV_ROOT/bin/nodenv" init -)"
+}
+install_nodenv_aliases
+
 # rbenv
 rbenv_aliases=(
   rbenv
