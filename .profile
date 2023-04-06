@@ -106,7 +106,7 @@ load_keychain
 # cargo
 load_cargo() {
   CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
-  if [ ! -e "$CARGO_HOME" ]; then
+  if [ ! -e "$CARGO_HOME/env" ]; then
     return
   fi
   export CARGO_HOME
