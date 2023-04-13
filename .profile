@@ -65,12 +65,12 @@ load_homebrew() {
 }
 load_homebrew
 
-# Local settings
-export PATH="$HOME/local/bin${PATH:+:$PATH}"
-export MANPATH="$HOME/local/share/man${MANPATH:+:$MANPATH}:"
-export INFOPATH="$HOME/local/share/info${INFOPATH:+:$INFOPATH}:"
-export CPATH="$HOME/local/include${CPATH:+:$CPATH}"
-export LIBRARY_PATH="$HOME/local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+# Local paths
+export PATH="$HOME/.local/bin${PATH:+:$PATH}"
+export MANPATH="$HOME/.local/share/man${MANPATH:+:$MANPATH}:"
+export INFOPATH="$HOME/.local/share/info${INFOPATH:+:$INFOPATH}:"
+export CPATH="$HOME/.local/include${CPATH:+:$CPATH}"
+export LIBRARY_PATH="$HOME/.local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 
 # shims
 # https://github.com/ZhongRuoyu/shims
