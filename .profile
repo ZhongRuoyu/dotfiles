@@ -52,9 +52,8 @@ load_homebrew() {
   *) return ;;
   esac
   if [ ! -e "$HOMEBREW_PREFIX" ]; then
-    if [ -e "$HOME/opt/homebrew" ]; then
-      HOMEBREW_PREFIX="$HOME/opt/homebrew"
-    else
+    HOMEBREW_PREFIX="$HOME/.local/opt/homebrew"
+    if [ ! -e "$HOMEBREW_PREFIX" ]; then
       return
     fi
   fi
@@ -74,12 +73,14 @@ export LIBRARY_PATH="$HOME/.local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 
 # shims
 # https://github.com/ZhongRuoyu/shims
-export SHIMS_LOCAL_PROFILES_PATH="$HOME/opt/shims/profiles"
-export PATH="$HOME/opt/shims/local:$HOME/opt/shims/shims${PATH:+:$PATH}"
+export SHIMS_PREFIX="${SHIMS_PREFIX:-$HOME/.local/opt/shims}"
+export SHIMS_LOCAL_PROFILES_PATH="$SHIMS_PREFIX/profiles"
+export PATH="$SHIMS_PREFIX/local:$SHIMS_PREFIX/shims${PATH:+:$PATH}"
 
 # shell-utils
 # https://github.com/ZhongRuoyu/shell-utils
-export PATH="$HOME/opt/shell-utils/bin${PATH:+:$PATH}"
+export SHELL_UTILS_PREFIX="${SHELL_UTILS_PREFIX:-$HOME/.local/opt/shell-utils}"
+export PATH="$SHELL_UTILS_PREFIX/bin${PATH:+:$PATH}"
 
 # GPG
 if [ -t 1 ]; then
@@ -89,7 +90,7 @@ fi
 
 # Keychain
 load_keychain() {
-  KEYCHAIN_PREFIX="${KEYCHAIN_PREFIX:-$HOME/opt/keychain}"
+  KEYCHAIN_PREFIX="${KEYCHAIN_PREFIX:-$HOME/.local/opt/keychain}"
   if [ ! -e "$KEYCHAIN_PREFIX" ]; then
     return
   fi
@@ -157,9 +158,13 @@ load_conda() {
   local shell
   local conda_setup
   uninstall_conda_aliases
-  CONDA_ROOT="${CONDA_ROOT:-$HOME/opt/miniforge3}"
+  CONDA_ROOT="${CONDA_ROOT:-$HOME/.local/opt/miniforge3}"
   if [ ! -e "$CONDA_ROOT" ]; then
-    return
+    CONDA_ROOT="$HOME/opt/miniforge3"
+    if [ ! -e "$CONDA_ROOT" ]; then
+      return
+    fi
+    echo "Warning: ~/opt is deprecated. Use ~/.local/opt instead." >&2
   fi
   export CONDA_ROOT
   shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
