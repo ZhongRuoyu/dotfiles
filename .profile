@@ -169,9 +169,13 @@ load_conda() {
   # shellcheck source=/dev/null
   if [ -e "$CONDA_ROOT/etc/profile.d/mamba.sh" ]; then
     source "$CONDA_ROOT/etc/profile.d/mamba.sh"
-    mamba activate default
+    if [ -e "$CONDA_ROOT/envs/default" ]; then
+      mamba activate default
+    fi
   else
-    conda activate default
+    if [ -e "$CONDA_ROOT/envs/default" ]; then
+      conda activate default
+    fi
   fi
 }
 install_conda_aliases
