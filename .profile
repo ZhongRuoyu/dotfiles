@@ -160,11 +160,7 @@ load_conda() {
   uninstall_conda_aliases
   CONDA_ROOT="${CONDA_ROOT:-$HOME/.local/opt/miniforge3}"
   if [ ! -e "$CONDA_ROOT" ]; then
-    CONDA_ROOT="$HOME/opt/miniforge3"
-    if [ ! -e "$CONDA_ROOT" ]; then
-      return
-    fi
-    echo "Warning: ~/opt is deprecated. Use ~/.local/opt instead." >&2
+    return
   fi
   export CONDA_ROOT
   shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
