@@ -1,27 +1,27 @@
 [user]
-	name = Ruoyu Zhong
-	email = zhongruoyu@outlook.com
+  name = Ruoyu Zhong
+  email = zhongruoyu@outlook.com
   signingKey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENG95BByYQBeMHGo7TB0bHxMG5lfbEmRr9MJahJV49h
 [core]
-	excludesFile = ~/.gitignore_global
+  excludesFile = ~/.gitignore_global
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [pull]
-	rebase = false
+  rebase = false
 [commit]
-	gpgSign = true
+  gpgSign = true
 [tag]
-	gpgSign = true
+  gpgSign = true
 [gpg]
   format = ssh
 [gpg "ssh"]
   allowedSignersFile = ~/.ssh/allowed_signers
 [url "git@github.com:"]
-	insteadOf = git://github.com/
-	insteadOf = https://github.com/
+  insteadOf = git://github.com/
+  insteadOf = https://github.com/
 [url "git@gitlab.com:"]
-	insteadOf = git://gitlab.com/
-	insteadOf = https://gitlab.com/
+  insteadOf = git://gitlab.com/
+  insteadOf = https://gitlab.com/
 [url "git@bitbucket.org:"]
-	insteadOf = git://bitbucket.org/
-	insteadOf = https://bitbucket.org/
+  insteadOf = git://bitbucket.org/
+  insteadOf = https://bitbucket.org/
