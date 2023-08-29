@@ -1,7 +1,7 @@
 [user]
 	name = Ruoyu Zhong
 	email = zhongruoyu@outlook.com
-	signingKey = DCAF462CAB59907D
+  signingKey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENG95BByYQBeMHGo7TB0bHxMG5lfbEmRr9MJahJV49h
 [core]
 	excludesFile = ~/.gitignore_global
 [init]
@@ -12,6 +12,10 @@
 	gpgSign = true
 [tag]
 	gpgSign = true
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed_signers
 [url "git@github.com:"]
 	insteadOf = git://github.com/
 	insteadOf = https://github.com/
