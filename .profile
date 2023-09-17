@@ -180,39 +180,6 @@ load_conda() {
 }
 install_conda_aliases
 
-# nvm - deprecated
-nvm_aliases=(
-  nvm
-)
-install_nvm_aliases() {
-  local nvm_alias
-  for nvm_alias in "${nvm_aliases[@]}"; do
-    # shellcheck disable=SC2139
-    alias "$nvm_alias"="load_nvm && $nvm_alias"
-  done
-}
-uninstall_nvm_aliases() {
-  local nvm_alias
-  for nvm_alias in "${nvm_aliases[@]}"; do
-    if alias "$nvm_alias" &>/dev/null; then
-      unalias "$nvm_alias"
-    fi
-  done
-}
-load_nvm() {
-  uninstall_nvm_aliases
-  NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
-  if [ ! -e "$NVM_DIR" ]; then
-    return
-  fi
-  export NVM_DIR
-  # shellcheck source=/dev/null
-  source "$NVM_DIR/nvm.sh"
-  # shellcheck source=/dev/null
-  source "$NVM_DIR/bash_completion"
-}
-install_nvm_aliases
-
 # nodenv
 nodenv_aliases=(
   nodenv
