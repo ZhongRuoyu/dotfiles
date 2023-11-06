@@ -2,6 +2,8 @@
 
 set -e
 
+cd "${0%/*}"
+
 destination="$HOME"
 interactive=""
 

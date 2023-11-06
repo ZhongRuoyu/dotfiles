@@ -2,6 +2,8 @@
 
 set -e
 
+cd "${0%/*}"
+
 source="$HOME"
 
 usage() {
