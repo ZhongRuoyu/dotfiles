@@ -24,3 +24,5 @@ set tabstop=2
 " navigation
 set scrolloff=5
 set whichwrap+=<,>,[,]
+
+source ~/.vimrc.local
