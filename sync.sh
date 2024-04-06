@@ -33,6 +33,7 @@ excluded() {
     "install.sh"
     "sync.sh"
     "LICENSE"
+    "README.md"
   )
   local file="$1"
   local exclude
