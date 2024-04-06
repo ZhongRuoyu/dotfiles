@@ -45,7 +45,7 @@ load_homebrew() {
   case "$(uname -s)" in
   "Darwin")
     case "$(uname -m)" in
-    "amd64") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}" ;;
+    "arm64") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}" ;;
     "x86_64") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/usr/local}" ;;
     *) return ;;
     esac
