@@ -90,14 +90,13 @@ load_conda() {
     return
   fi
   export CONDA_ROOT
-  eval "$(
-    "$CONDA_ROOT/bin/conda" \
-      "shell.$(
-        ps -o comm= -p "$$" |
-          sed -En 's/^(-|.*\/)?(.*)$/\2/p'
-      )" \
-      hook
-  )"
+  _load_conda_shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
+  case "$_load_conda_shell" in
+  bash) _load_conda_shell="bash" ;;
+  zsh) _load_conda_shell="zsh" ;;
+  *) _load_conda_shell="posix" ;;
+  esac
+  eval "$("$CONDA_ROOT/bin/conda" "shell.$_load_conda_shell" hook)"
   if [ -e "$CONDA_ROOT/etc/profile.d/mamba.sh" ]; then
     # shellcheck source=/dev/null
     . "$CONDA_ROOT/etc/profile.d/mamba.sh"
