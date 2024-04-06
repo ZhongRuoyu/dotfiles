@@ -1,0 +1,10 @@
+# shellcheck shell=bash
+
+# shellcheck source=/dev/null
+source "$HOME/.shell/env"
+
+# Local env profile
+if [[ -e "$HOME/.bash/env.local" ]]; then
+  # shellcheck source=/dev/null
+  . "$HOME/.bash/env.local"
+fi

@@ -1,0 +1,10 @@
+# shellcheck disable=SC2148
+
+# shellcheck source=/dev/null
+source "$HOME/.shell/logout"
+
+# Local logout profile
+if [[ -e "$HOME/.zsh/logout.local" ]]; then
+  # shellcheck source=/dev/null
+  . "$HOME/.zsh/logout.local"
+fi

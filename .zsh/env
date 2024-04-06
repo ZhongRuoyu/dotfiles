@@ -1,0 +1,10 @@
+# shellcheck disable=SC2148
+
+# shellcheck source=/dev/null
+source "$HOME/.shell/env"
+
+# Local env profile
+if [[ -e "$HOME/.zsh/env.local" ]]; then
+  # shellcheck source=/dev/null
+  source "$HOME/.zsh/env.local"
+fi

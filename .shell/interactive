@@ -1,0 +1,227 @@
+# shellcheck shell=sh
+
+# Enable colorized output
+alias grep="grep --color=auto"
+alias ls="ls --color=auto"
+
+# Allow alias substitution after sudo
+alias sudo="sudo "
+
+# Let tar ignore .DS_Store and ._ files
+tar() {
+  # if [ "$#" -ge 1 ] && [ "${1:0:1}" != "-" ]; then
+  if [ "$#" -ge 1 ] && [ "$(printf '%s' "$1" | cut -c 1)" != "-" ]; then
+    _tar_options="$1"
+    shift 1
+    set -- "-$_tar_options" "$@"
+  fi
+  COPYFILE_DISABLE=1 command tar --exclude=".DS_Store" "$@"
+  unset _tar_options
+}
+
+# GPG
+if [ -t 1 ]; then
+  GPG_TTY="$(tty)"
+  export GPG_TTY
+fi
+
+# Keychain
+load_keychain() {
+  KEYCHAIN_PREFIX="${KEYCHAIN_PREFIX:-$HOME/.local/opt/keychain}"
+  if [ ! -e "$KEYCHAIN_PREFIX" ]; then
+    return
+  fi
+  export KEYCHAIN_PREFIX
+  export PATH="$KEYCHAIN_PREFIX${PATH:+:$PATH}"
+  if [ "$(uname -s)" = "Darwin" ]; then
+    eval "$(keychain --eval --noask --quiet --inherit any)"
+  else
+    eval "$(keychain --eval --noask --quiet)"
+  fi
+  unset -f load_keychain
+}
+load_keychain
+
+# Conda
+install_conda_aliases() {
+  set -- \
+    conda \
+    mamba \
+    2to3 \
+    idle3 \
+    pip pip3 \
+    pydoc pydoc3 \
+    python python3 \
+    python3-config \
+    wheel wheel3
+  for _install_conda_aliases_conda_alias in "$@"; do
+    # shellcheck disable=SC2139
+    alias "$_install_conda_aliases_conda_alias"="\
+[ -n \"\$VIRTUAL_ENV\" ] || \
+load_conda && \
+$_install_conda_aliases_conda_alias"
+  done
+  unset _install_conda_aliases_conda_alias
+  unset -f install_conda_aliases
+}
+uninstall_conda_aliases() {
+  set -- \
+    conda \
+    mamba \
+    2to3 \
+    idle3 \
+    pip pip3 \
+    pydoc pydoc3 \
+    python python3 \
+    python3-config \
+    wheel wheel3
+  for _uninstall_conda_aliases_conda_alias in "$@"; do
+    if alias "$_uninstall_conda_aliases_conda_alias" >/dev/null 2>&1; then
+      unalias "$_uninstall_conda_aliases_conda_alias"
+    fi
+  done
+  unset _uninstall_conda_aliases_conda_alias
+  unset -f uninstall_conda_aliases
+}
+load_conda() {
+  uninstall_conda_aliases
+  CONDA_ROOT="${CONDA_ROOT:-$HOME/.local/opt/miniforge3}"
+  if [ ! -e "$CONDA_ROOT" ]; then
+    return
+  fi
+  export CONDA_ROOT
+  eval "$(
+    "$CONDA_ROOT/bin/conda" \
+      "shell.$(
+        ps -o comm= -p "$$" |
+          sed -En 's/^(-|.*\/)?(.*)$/\2/p'
+      )" \
+      hook
+  )"
+  if [ -e "$CONDA_ROOT/etc/profile.d/mamba.sh" ]; then
+    # shellcheck source=/dev/null
+    . "$CONDA_ROOT/etc/profile.d/mamba.sh"
+    if [ -e "$CONDA_ROOT/envs/default" ]; then
+      mamba activate default
+    fi
+  else
+    if [ -e "$CONDA_ROOT/envs/default" ]; then
+      conda activate default
+    fi
+  fi
+  unset -f load_conda
+}
+install_conda_aliases
+
+# nodenv
+install_nodenv_aliases() {
+  set -- \
+    nodenv \
+    corepack \
+    node \
+    npm \
+    npx
+  for _install_nodenv_aliases_nodenv_alias in "$@"; do
+    # shellcheck disable=SC2139
+    alias "$_install_nodenv_aliases_nodenv_alias"="\
+load_nodenv && \
+$_install_nodenv_aliases_nodenv_alias"
+  done
+  unset _install_nodenv_aliases_nodenv_alias
+  unset -f install_nodenv_aliases
+}
+uninstall_nodenv_aliases() {
+  set -- \
+    nodenv \
+    corepack \
+    node \
+    npm \
+    npx
+  for _uninstall_nodenv_aliases_nodenv_alias in "$@"; do
+    if alias "$_uninstall_nodenv_aliases_nodenv_alias" >/dev/null 2>&1; then
+      unalias "$_uninstall_nodenv_aliases_nodenv_alias"
+    fi
+  done
+  unset _uninstall_nodenv_aliases_nodenv_alias
+  unset -f uninstall_nodenv_aliases
+}
+load_nodenv() {
+  uninstall_nodenv_aliases
+  NODENV_ROOT="${NODENV_ROOT:-$HOME/.nodenv}"
+  if [ ! -e "$NODENV_ROOT" ]; then
+    return
+  fi
+  export NODENV_ROOT
+  export PATH="$NODENV_ROOT/bin${PATH:+:$PATH}"
+  eval "$("$NODENV_ROOT/bin/nodenv" init -)"
+  unset -f load_nodenv
+}
+install_nodenv_aliases
+
+# rbenv
+install_rbenv_aliases() {
+  set -- \
+    rbenv \
+    bundle \
+    bundler \
+    erb \
+    gem \
+    irb \
+    racc \
+    rake \
+    rbs \
+    rdbg \
+    rdoc \
+    ri \
+    ruby \
+    typeprof
+  for _install_rbenv_aliases_rbenv_alias in "$@"; do
+    # shellcheck disable=SC2139
+    alias "$_install_rbenv_aliases_rbenv_alias"="\
+load_rbenv && \
+$_install_rbenv_aliases_rbenv_alias"
+  done
+  unset _install_rbenv_aliases_rbenv_alias
+  unset -f install_rbenv_aliases
+}
+uninstall_rbenv_aliases() {
+  set -- \
+    rbenv \
+    bundle \
+    bundler \
+    erb \
+    gem \
+    irb \
+    racc \
+    rake \
+    rbs \
+    rdbg \
+    rdoc \
+    ri \
+    ruby \
+    typeprof
+  for _uninstall_rbenv_aliases_rbenv_alias in "$@"; do
+    if alias "$_uninstall_rbenv_aliases_rbenv_alias" >/dev/null 2>&1; then
+      unalias "$_uninstall_rbenv_aliases_rbenv_alias"
+    fi
+  done
+  unset _uninstall_rbenv_aliases_rbenv_alias
+  unset -f uninstall_rbenv_aliases
+}
+load_rbenv() {
+  uninstall_rbenv_aliases
+  RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
+  if [ ! -e "$RBENV_ROOT" ]; then
+    return
+  fi
+  export RBENV_ROOT
+  eval "$("$RBENV_ROOT/bin/rbenv" init -)"
+  unset -f load_rbenv
+}
+install_rbenv_aliases
+
+# Local interactive profile
+if [ -e "$HOME/.shell/interactive.local" ]; then
+  # shellcheck source=/dev/null
+  . "$HOME/.shell/interactive.local"
+fi

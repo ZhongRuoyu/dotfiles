@@ -1,12 +1,13 @@
 # shellcheck shell=bash
 
 # shellcheck source=/dev/null
-source "$HOME/.profile"
-# shellcheck source=/dev/null
-source "$HOME/.bashrc"
+source "$HOME/.bash/env"
+BASH_ENV=""
 
-# Local bash profile
-if [[ -e "$HOME/.bash_profile.local" ]]; then
+# shellcheck source=/dev/null
+source "$HOME/.bash/login"
+
+if [[ $- == *i* ]]; then
   # shellcheck source=/dev/null
-  source "$HOME/.bash_profile.local"
+  source "$HOME/.bash/interactive"
 fi

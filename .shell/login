@@ -1,0 +1,85 @@
+# shellcheck shell=sh
+
+# Locale
+set_locale() {
+  set -- "en_US.UTF-8" "en_US.utf8" "en_US" "C.UTF-8" "C.utf8" "C"
+  _set_locale_all_locales="$(locale -a)"
+  for _set_locale_locale_candidate in "$@"; do
+    if echo "$_set_locale_all_locales" |
+      grep -Fqx "$_set_locale_locale_candidate"; then
+      export LC_ALL="$_set_locale_locale_candidate"
+      break
+    fi
+  done
+  unset _set_locale_all_locales
+  unset _set_locale_locale_candidate
+}
+set_locale
+unset -f set_locale
+
+# Default programs
+export EDITOR=vim
+export PAGER=less
+export VISUAL=vim
+
+# Local paths
+export PATH="$HOME/.local/bin${PATH:+:$PATH}"
+export MANPATH="$HOME/.local/share/man${MANPATH:+:$MANPATH}:"
+export INFOPATH="$HOME/.local/share/info${INFOPATH:+:$INFOPATH}:"
+export CPATH="$HOME/.local/include${CPATH:+:$CPATH}"
+export LIBRARY_PATH="$HOME/.local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+
+# shims
+# https://github.com/ZhongRuoyu/shims
+export SHIMS_PREFIX="${SHIMS_PREFIX:-$HOME/.local/opt/shims}"
+export SHIMS_LOCAL_PROFILES_PATH="$SHIMS_PREFIX/profiles"
+export PATH="$SHIMS_PREFIX/local:$SHIMS_PREFIX/shims${PATH:+:$PATH}"
+
+# shell-utils
+# https://github.com/ZhongRuoyu/shell-utils
+export SHELL_UTILS_PREFIX="${SHELL_UTILS_PREFIX:-$HOME/.local/opt/shell-utils}"
+export PATH="$SHELL_UTILS_PREFIX/bin${PATH:+:$PATH}"
+
+# Homebrew
+load_homebrew() {
+  case "$(uname -s)" in
+  "Darwin")
+    case "$(uname -m)" in
+    "amd64") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}" ;;
+    "x86_64") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/usr/local}" ;;
+    *) return ;;
+    esac
+    ;;
+  "Linux") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}" ;;
+  *) return ;;
+  esac
+  if [ ! -e "$HOMEBREW_PREFIX" ]; then
+    HOMEBREW_PREFIX="$HOME/.local/opt/homebrew"
+    if [ ! -e "$HOMEBREW_PREFIX" ]; then
+      return
+    fi
+  fi
+  export HOMEBREW_PREFIX
+  eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
+  unset -f load_homebrew
+}
+load_homebrew
+
+# Cargo
+load_cargo() {
+  CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
+  if [ ! -e "$CARGO_HOME/env" ]; then
+    return
+  fi
+  export CARGO_HOME
+  # shellcheck source=/dev/null
+  . "$CARGO_HOME/env"
+  unset -f load_cargo
+}
+load_cargo
+
+# Local login profile
+if [ -e "$HOME/.shell/login.local" ]; then
+  # shellcheck source=/dev/null
+  . "$HOME/.shell/login.local"
+fi

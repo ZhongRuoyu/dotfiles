@@ -1,0 +1,7 @@
+# shellcheck disable=SC2148
+
+# Local logout profile
+if [[ -e "$HOME/.shell/logout.local" ]]; then
+  # shellcheck source=/dev/null
+  . "$HOME/.shell/logout.local"
+fi
