@@ -25,4 +25,6 @@ set tabstop=2
 set scrolloff=5
 set whichwrap+=<,>,[,]
 
-source ~/.vimrc.local
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
