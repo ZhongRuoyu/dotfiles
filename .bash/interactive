@@ -29,7 +29,9 @@ fi
 PS1="[\u@\h \W]\\$ "
 
 # History control
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoredups:ignorespace
+HISTFILESIZE=65536
+HISTSIZE=65536
 
 # Local interactive profile
 if [[ -e "$HOME/.bash/interactive.local" ]]; then
