@@ -22,24 +22,6 @@ export EDITOR=vim
 export PAGER=less
 export VISUAL=vim
 
-# Local paths
-export PATH="$HOME/.local/bin${PATH:+:$PATH}"
-export MANPATH="$HOME/.local/share/man${MANPATH:+:$MANPATH}:"
-export INFOPATH="$HOME/.local/share/info${INFOPATH:+:$INFOPATH}:"
-export CPATH="$HOME/.local/include${CPATH:+:$CPATH}"
-export LIBRARY_PATH="$HOME/.local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
-
-# shims
-# https://github.com/ZhongRuoyu/shims
-export SHIMS_PREFIX="${SHIMS_PREFIX:-$HOME/.local/opt/shims}"
-export SHIMS_LOCAL_PROFILES_PATH="$SHIMS_PREFIX/profiles"
-export PATH="$SHIMS_PREFIX/local:$SHIMS_PREFIX/shims${PATH:+:$PATH}"
-
-# shell-utils
-# https://github.com/ZhongRuoyu/shell-utils
-export SHELL_UTILS_PREFIX="${SHELL_UTILS_PREFIX:-$HOME/.local/opt/shell-utils}"
-export PATH="$SHELL_UTILS_PREFIX/bin${PATH:+:$PATH}"
-
 # Homebrew
 load_homebrew() {
   case "$(uname -s)" in
@@ -77,6 +59,24 @@ load_cargo() {
   unset -f load_cargo
 }
 load_cargo
+
+# Local paths
+export PATH="$HOME/.local/bin${PATH:+:$PATH}"
+export MANPATH="$HOME/.local/share/man${MANPATH:+:$MANPATH}:"
+export INFOPATH="$HOME/.local/share/info${INFOPATH:+:$INFOPATH}:"
+export CPATH="$HOME/.local/include${CPATH:+:$CPATH}"
+export LIBRARY_PATH="$HOME/.local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+
+# shims
+# https://github.com/ZhongRuoyu/shims
+export SHIMS_PREFIX="${SHIMS_PREFIX:-$HOME/.local/opt/shims}"
+export SHIMS_LOCAL_PROFILES_PATH="$SHIMS_PREFIX/profiles"
+export PATH="$SHIMS_PREFIX/local:$SHIMS_PREFIX/shims${PATH:+:$PATH}"
+
+# shell-utils
+# https://github.com/ZhongRuoyu/shell-utils
+export SHELL_UTILS_PREFIX="${SHELL_UTILS_PREFIX:-$HOME/.local/opt/shell-utils}"
+export PATH="$SHELL_UTILS_PREFIX/bin${PATH:+:$PATH}"
 
 # Local login profile
 if [ -e "$HOME/.shell/login.local" ]; then
