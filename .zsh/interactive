@@ -15,7 +15,6 @@ export ZSH_CUSTOM="$ZSH/custom"
 plugins=(
   # oh-my-zsh plugins
   git
-  pip
   # custom plugins
   conda-zsh-completion
   zsh-autosuggestions
