@@ -43,9 +43,9 @@ load_homebrew() {
   fi
   export HOMEBREW_PREFIX
   eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
-  unset -f load_homebrew
 }
 load_homebrew
+unset -f load_homebrew
 
 # Cargo
 load_cargo() {
@@ -56,9 +56,9 @@ load_cargo() {
   export CARGO_HOME
   # shellcheck source=/dev/null
   . "$CARGO_HOME/env"
-  unset -f load_cargo
 }
 load_cargo
+unset -f load_cargo
 
 # Local paths
 export PATH="$HOME/.local/bin${PATH:+:$PATH}"

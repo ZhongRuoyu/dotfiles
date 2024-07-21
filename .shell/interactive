@@ -43,9 +43,9 @@ load_keychain() {
   else
     eval "$(keychain --eval --noask --quiet)"
   fi
-  unset -f load_keychain
 }
 load_keychain
+unset -f load_keychain
 
 # Conda
 install_conda_aliases() {
@@ -67,7 +67,6 @@ load_conda && \
 $_install_conda_aliases_conda_alias"
   done
   unset _install_conda_aliases_conda_alias
-  unset -f install_conda_aliases
 }
 uninstall_conda_aliases() {
   set -- \
@@ -86,7 +85,6 @@ uninstall_conda_aliases() {
     fi
   done
   unset _uninstall_conda_aliases_conda_alias
-  unset -f uninstall_conda_aliases
 }
 load_conda() {
   uninstall_conda_aliases
@@ -113,7 +111,6 @@ load_conda() {
       conda activate default
     fi
   fi
-  unset -f load_conda
 }
 install_conda_aliases
 
@@ -132,7 +129,6 @@ load_nodenv && \
 $_install_nodenv_aliases_nodenv_alias"
   done
   unset _install_nodenv_aliases_nodenv_alias
-  unset -f install_nodenv_aliases
 }
 uninstall_nodenv_aliases() {
   set -- \
@@ -147,7 +143,6 @@ uninstall_nodenv_aliases() {
     fi
   done
   unset _uninstall_nodenv_aliases_nodenv_alias
-  unset -f uninstall_nodenv_aliases
 }
 load_nodenv() {
   uninstall_nodenv_aliases
@@ -158,7 +153,6 @@ load_nodenv() {
   export NODENV_ROOT
   export PATH="$NODENV_ROOT/bin${PATH:+:$PATH}"
   eval "$("$NODENV_ROOT/bin/nodenv" init -)"
-  unset -f load_nodenv
 }
 install_nodenv_aliases
 
@@ -186,7 +180,6 @@ load_rbenv && \
 $_install_rbenv_aliases_rbenv_alias"
   done
   unset _install_rbenv_aliases_rbenv_alias
-  unset -f install_rbenv_aliases
 }
 uninstall_rbenv_aliases() {
   set -- \
@@ -210,7 +203,6 @@ uninstall_rbenv_aliases() {
     fi
   done
   unset _uninstall_rbenv_aliases_rbenv_alias
-  unset -f uninstall_rbenv_aliases
 }
 load_rbenv() {
   uninstall_rbenv_aliases
@@ -220,7 +212,6 @@ load_rbenv() {
   fi
   export RBENV_ROOT
   eval "$("$RBENV_ROOT/bin/rbenv" init -)"
-  unset -f load_rbenv
 }
 install_rbenv_aliases
 
