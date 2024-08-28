@@ -23,6 +23,8 @@ plugins=(
 # zsh-completions
 # https://github.com/zsh-users/zsh-completions/issues/603
 FPATH="$ZSH_CUSTOM/plugins/zsh-completions/src${FPATH:+:$FPATH}"
+# Always auto-update oh-my-zsh.
+DISABLE_UPDATE_PROMPT=true
 # shellcheck source=/dev/null
 source "$ZSH/oh-my-zsh.sh"
 
