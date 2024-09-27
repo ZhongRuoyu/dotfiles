@@ -62,7 +62,6 @@ install_conda_aliases() {
   for _install_conda_aliases_conda_alias in "$@"; do
     # shellcheck disable=SC2139
     alias "$_install_conda_aliases_conda_alias"="\
-[ -n \"\$VIRTUAL_ENV\" ] || \
 load_conda && \
 $_install_conda_aliases_conda_alias"
   done
@@ -110,6 +109,9 @@ load_conda() {
     if [ -e "$CONDA_ROOT/envs/default" ]; then
       conda activate default
     fi
+  fi
+  if [ -n "$VIRTUAL_ENV" ]; then
+    export PATH="$VIRTUAL_ENV/bin${PATH:+:$PATH}"
   fi
 }
 install_conda_aliases
