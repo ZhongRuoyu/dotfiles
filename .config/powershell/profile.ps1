@@ -109,6 +109,9 @@ function Import-Conda {
   if (Test-Path "$CONDA_ROOT/envs/default") {
     conda activate default
   }
+  if ($env:VIRTUAL_ENV) {
+    $env:PATH = "$env:VIRTUAL_ENV/bin:$env:PATH"
+  }
   Remove-Item -Path Function:/Import-Conda
   if ($args.Length -gt 0) {
     $cmd = $args[0]
