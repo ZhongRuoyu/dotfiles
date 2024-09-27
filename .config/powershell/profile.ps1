@@ -53,8 +53,12 @@ function Set-CondaAliases {
   )
   foreach ($alias in $conda_aliases) {
     New-Item -Path Function:global:$alias -Value {
-      Import-Conda
-      & $MyInvocation.MyCommand.Name $args
+      if ($MyInvocation.ExpectingInput) {
+        $input | Import-Conda $MyInvocation.MyCommand.Name $args
+      }
+      else {
+        Import-Conda $MyInvocation.MyCommand.Name $args
+      }
     } > $null
   }
   Remove-Item -Path Function:/Set-CondaAliases
@@ -85,6 +89,16 @@ function Import-Conda {
     $CONDA_ROOT = "$HOME/.local/opt/miniforge3"
   }
   If (-Not (Test-Path "$CONDA_ROOT/bin/conda")) {
+    if ($args.Length -gt 0) {
+      $cmd = $args[0]
+      $cmd_args = $args[1..$args.Length]
+      if ($MyInvocation.ExpectingInput) {
+        $input | & $cmd @cmd_args
+      }
+      else {
+        & $cmd @cmd_args
+      }
+    }
     return
   }
   $env:CONDA_ROOT = $CONDA_ROOT
@@ -96,5 +110,15 @@ function Import-Conda {
     conda activate default
   }
   Remove-Item -Path Function:/Import-Conda
+  if ($args.Length -gt 0) {
+    $cmd = $args[0]
+    $cmd_args = $args[1..$args.Length]
+    if ($MyInvocation.ExpectingInput) {
+      $input | & $cmd @cmd_args
+    }
+    else {
+      & $cmd @cmd_args
+    }
+  }
 }
 Set-CondaAliases
