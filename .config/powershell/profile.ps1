@@ -84,11 +84,13 @@ function Import-Conda {
   Uninstall-CondaAliases
   if ($IsWindows) {
     $CONDA_ROOT = "$HOME/miniforge3"
+    $conda_exe = "$CONDA_ROOT/Scripts/conda.exe"
   }
   else {
     $CONDA_ROOT = "$HOME/.local/opt/miniforge3"
+    $conda_exe = "$CONDA_ROOT/bin/conda"
   }
-  If (-Not (Test-Path "$CONDA_ROOT/bin/conda")) {
+  If (-Not (Test-Path $conda_exe)) {
     if ($args.Length -gt 0) {
       $cmd = $args[0]
       $cmd_args = $args[1..$args.Length]
@@ -102,7 +104,7 @@ function Import-Conda {
     return
   }
   $env:CONDA_ROOT = $CONDA_ROOT
-  (& "$CONDA_ROOT/bin/conda" "shell.powershell" "hook") |
+  (& $conda_exe "shell.powershell" "hook") |
   Out-String |
   Where-Object { $_ } |
   Invoke-Expression
