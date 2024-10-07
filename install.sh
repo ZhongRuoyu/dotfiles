@@ -9,12 +9,13 @@ interactive=""
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") [options] file...
+Usage: $(basename "$0") [options] [<file>...]
 
 Options:
   -h, --help            Display this help text
-  -d, --destination     Set destination directory (default: $HOME)
-  -i, --interactive     Prompt before each file write
+  -d <dir>, --destination <dir>
+                        Set destination directory (default: $HOME)
+  -i, --interactive     Prompt before installing or deleting files
 
 EOF
 }

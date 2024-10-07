@@ -8,11 +8,12 @@ source="$HOME"
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") [options] file...
+Usage: $(basename "$0") [options] [<file>...]
 
 Options:
   -h, --help            Display this help text
-  -s, --source          Set source directory (default: $HOME)
+  -s <dir>, --source <dir>
+                        Set source directory (default: $HOME)
 
 EOF
 }
