@@ -66,6 +66,7 @@ while [[ "$#" -ge 1 ]]; do
     exit 0
     ;;
   "-s" | "--source")
+    shift
     source="$1"
     shift
     ;;

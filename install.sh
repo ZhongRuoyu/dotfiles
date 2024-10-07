@@ -96,10 +96,12 @@ while [[ "$#" -ge 1 ]]; do
     exit 0
     ;;
   "-d" | "--destination")
+    shift
     destination="$1"
     shift
     ;;
   "-i" | "--interactive")
+    shift
     interactive="$1"
     shift
     ;;
