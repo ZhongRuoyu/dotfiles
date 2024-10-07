@@ -101,8 +101,7 @@ while [[ "$#" -ge 1 ]]; do
     shift
     ;;
   "-i" | "--interactive")
-    shift
-    interactive="$1"
+    interactive="1"
     shift
     ;;
   "--")
