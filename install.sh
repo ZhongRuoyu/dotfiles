@@ -85,10 +85,37 @@ install() {
     fi
   fi
   mkdir -p "$(dirname "$destination/$file")"
-  cp -v "$file" "$destination/$file"
+  cp "$file" "$destination/$file"
+  echo "Installed $file to $destination/$file"
+}
+
+uninstall() {
+  local file="$1"
+  local input
+  if [[ ! -e "$destination/$file" ]]; then
+    return
+  fi
+  if [[ ! -f "$destination/$file" ]]; then
+    echo "Warning: $destination/$file is not a regular file; skipped"
+    return
+  fi
+  if [[ -n "$interactive" ]]; then
+    while true; do
+      echo -n "Remove $destination/$file? [y/N] "
+      read -r input
+      case "$input" in
+      [Yy]) break ;;
+      [Nn] | "") return ;;
+      *) echo "Please enter a valid option." ;;
+      esac
+    done
+  fi
+  rm "$destination/$file"
+  echo "Removed $destination/$file"
 }
 
 files=()
+uninstall_files=()
 while [[ "$#" -ge 1 ]]; do
   case "$1" in
   "-h" | "--help")
@@ -137,8 +164,22 @@ if [[ "${#files[@]}" -eq 0 ]]; then
     fi
     files+=("$file")
   done < <(git ls-tree --full-tree --name-only -r HEAD)
+
+  while IFS="" read -r file; do
+    if excluded "$file"; then
+      continue
+    fi
+    if ignored "$file"; then
+      echo "Note: $file is ignored."
+      continue
+    fi
+    uninstall_files+=("$file")
+  done < <(git log --all --pretty=format: --name-only --diff-filter=D)
 fi
 
 for file in "${files[@]}"; do
   install "$file"
+done
+for file in "${uninstall_files[@]}"; do
+  uninstall "$file"
 done
