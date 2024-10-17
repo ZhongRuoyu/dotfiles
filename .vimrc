@@ -10,6 +10,7 @@ set linebreak
 set number
 set ruler
 set showcmd
+set nowrap
 " editing
 set backspace=eol,indent,start
 set matchpairs+=<:>
@@ -24,6 +25,29 @@ set tabstop=2
 " navigation
 set scrolloff=5
 set whichwrap+=<,>,[,]
+" search
+set hlsearch
+set incsearch
+" whitespace display
+if has("multi_byte")
+  set list
+  set listchars=
+  set listchars+=tab:\\u21e5\\u0020
+  " set listchars+=space:\\u00b7
+  set listchars+=trail:\\u00b7
+  set listchars+=extends:\\u00bb
+  set listchars+=precedes:\\u00ab
+  set listchars+=nbsp:\\u2423
+else
+  set list
+  set listchars=
+  set listchars+=tab:>-
+  " set listchars+=space:.
+  set listchars+=trail:.
+  set listchars+=extends:>
+  set listchars+=precedes:<
+  set listchars+=nbsp:%
+endif
 
 " local configurations
 if filereadable(expand("~/.vimrc.local"))
