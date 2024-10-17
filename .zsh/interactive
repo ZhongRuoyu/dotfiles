@@ -21,6 +21,7 @@ FPATH="$ZSH_CUSTOM/plugins/zsh-completions/src${FPATH:+:$FPATH}"
 # rbenv
 FPATH="$HOME/.rbenv/completions${FPATH:+:$FPATH}"
 # Always auto-update oh-my-zsh.
+# shellcheck disable=SC2034
 DISABLE_UPDATE_PROMPT=true
 # shellcheck source=/dev/null
 source "$ZSH/oh-my-zsh.sh"
