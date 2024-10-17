@@ -28,6 +28,9 @@ set whichwrap+=<,>,[,]
 " search
 set hlsearch
 set incsearch
+" rulers
+set colorcolumn=81,101,121
+highlight ColorColumn ctermbg=darkgray
 " whitespace display
 if has("multi_byte")
   set list
@@ -48,6 +51,9 @@ else
   set listchars+=precedes:<
   set listchars+=nbsp:%
 endif
+" completion
+set wildmenu
+set wildmode=list:longest,list:full
 
 " local configurations
 if filereadable(expand("~/.vimrc.local"))
