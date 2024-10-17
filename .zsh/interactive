@@ -3,11 +3,6 @@
 # shellcheck source=/dev/null
 source "$HOME/.shell/interactive"
 
-# Homebrew completions
-if [[ -n "$HOMEBREW_PREFIX" ]]; then
-  FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions${FPATH:+:$FPATH}"
-fi
-
 # oh-my-zsh settings
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
