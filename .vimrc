@@ -1,4 +1,5 @@
 " https://vimhelp.org/filetype.txt.html
+let g:python_recommended_style = 0
 filetype plugin indent on
 
 " https://vimhelp.org/syntax.txt.html
