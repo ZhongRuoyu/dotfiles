@@ -54,10 +54,10 @@ function Set-CondaAliases {
   foreach ($alias in $conda_aliases) {
     New-Item -Path Function:global:$alias -Value {
       if ($MyInvocation.ExpectingInput) {
-        $input | Import-Conda $MyInvocation.MyCommand.Name $args
+        $input | Import-Conda $MyInvocation.MyCommand.Name @args
       }
       else {
-        Import-Conda $MyInvocation.MyCommand.Name $args
+        Import-Conda $MyInvocation.MyCommand.Name @args
       }
     } > $null
   }
@@ -85,10 +85,12 @@ function Import-Conda {
   if ($IsWindows) {
     $CONDA_ROOT = "$HOME/miniforge3"
     $conda_exe = "$CONDA_ROOT/Scripts/conda.exe"
+    $mamba_exe = "$CONDA_ROOT/condabin/mamba.bat"
   }
   else {
     $CONDA_ROOT = "$HOME/.local/opt/miniforge3"
     $conda_exe = "$CONDA_ROOT/bin/conda"
+    $mamba_exe = "$CONDA_ROOT/condabin/mamba"
   }
   If (-Not (Test-Path $conda_exe)) {
     if ($args.Length -gt 0) {
@@ -108,8 +110,30 @@ function Import-Conda {
   Out-String |
   Where-Object { $_ } |
   Invoke-Expression
-  if (Test-Path "$CONDA_ROOT/envs/default") {
-    conda activate default
+  if (Test-Path "$mamba_exe") {
+    $env:MAMBA_ROOT_PREFIX = $CONDA_ROOT
+    (& $mamba_exe "shell" "hook" "-s" "powershell") |
+    Out-String |
+    Invoke-Expression
+    ${Function:global:Enter-MambaEnvironment} =
+    ${Function:Enter-MambaEnvironment}
+    ${Function:global:Exit-MambaEnvironment} =
+    ${Function:Exit-MambaEnvironment}
+    ${Function:global:Invoke-Mamba} =
+    ${Function:Invoke-Mamba}
+    New-Alias -Name mamba -Scope Global -Value Invoke-Mamba -Force
+    $Global:MambaAutocompleteScriptblock = $MambaAutocompleteScriptblock
+    if (Test-Path Function:/MambaPromptBackup) {
+      ${Function:global:MambaPromptBackup} = ${Function:MambaPromptBackup}
+    }
+    if (Test-Path "$CONDA_ROOT/envs/default") {
+      mamba activate default
+    }
+  }
+  else {
+    if (Test-Path "$CONDA_ROOT/envs/default") {
+      conda activate default
+    }
   }
   if ($env:VIRTUAL_ENV) {
     $env:PATH = "$env:VIRTUAL_ENV/bin:$env:PATH"
