@@ -94,14 +94,18 @@ load_conda() {
   export CONDA_ROOT
   _load_conda_shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
   case "$_load_conda_shell" in
-  bash) _load_conda_shell="bash" ;;
-  zsh) _load_conda_shell="zsh" ;;
+  bash | csh | fish | zsh) ;;
   *) _load_conda_shell="posix" ;;
   esac
   eval "$("$CONDA_ROOT/bin/conda" "shell.$_load_conda_shell" hook)"
-  if [ -e "$CONDA_ROOT/etc/profile.d/mamba.sh" ]; then
-    # shellcheck source=/dev/null
-    . "$CONDA_ROOT/etc/profile.d/mamba.sh"
+  if [ -e "$CONDA_ROOT/condabin/mamba" ]; then
+    MAMBA_ROOT_PREFIX="$CONDA_ROOT"
+    export MAMBA_ROOT_PREFIX
+    eval "$(
+      "$CONDA_ROOT/condabin/mamba" shell hook \
+        --shell "$_load_conda_shell" \
+        --root-prefix "$MAMBA_ROOT_PREFIX"
+    )"
     if [ -e "$CONDA_ROOT/envs/default" ]; then
       mamba activate default
     fi
