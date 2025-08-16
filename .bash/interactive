@@ -33,6 +33,13 @@ HISTCONTROL=ignoredups:ignorespace
 HISTFILESIZE=65536
 HISTSIZE=65536
 
+# Local completions
+if [[ -d "$HOME/.local/share/bash-completion/completions" ]]; then
+  for COMPLETION in "$HOME/.local/share/bash-completion/completions/"*; do
+    [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+  done
+fi
+
 # Local interactive profile
 if [[ -e "$HOME/.bash/interactive.local" ]]; then
   # shellcheck source=/dev/null

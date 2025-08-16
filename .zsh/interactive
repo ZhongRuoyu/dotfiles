@@ -39,6 +39,9 @@ setopt SHARE_HISTORY
 SAVEHIST=65536
 HISTSIZE=65536
 
+# Local completions
+FPATH="$HOME/.local/share/zsh/site-functions${FPATH:+:$FPATH}"
+
 # Local interactive profile
 if [[ -e "$HOME/.zsh/interactive.local" ]]; then
   # shellcheck source=/dev/null
