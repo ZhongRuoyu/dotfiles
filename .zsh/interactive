@@ -18,6 +18,8 @@ plugins=(
 # zsh-completions
 # https://github.com/zsh-users/zsh-completions/issues/603
 FPATH="$ZSH_CUSTOM/plugins/zsh-completions/src${FPATH:+:$FPATH}"
+# nodenv
+FPATH="$HOME/.nodenv/completions${FPATH:+:$FPATH}"
 # rbenv
 FPATH="$HOME/.rbenv/completions${FPATH:+:$FPATH}"
 # Always auto-update oh-my-zsh.
