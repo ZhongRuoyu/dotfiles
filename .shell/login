@@ -7,6 +7,7 @@ set_locale() {
   for _set_locale_locale_candidate in "$@"; do
     if echo "$_set_locale_all_locales" |
       grep -Fqx "$_set_locale_locale_candidate"; then
+      export LANG="$_set_locale_locale_candidate"
       export LC_ALL="$_set_locale_locale_candidate"
       break
     fi
