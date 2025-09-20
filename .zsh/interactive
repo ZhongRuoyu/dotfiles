@@ -41,6 +41,10 @@ setopt SHARE_HISTORY
 SAVEHIST=65536
 HISTSIZE=65536
 
+# zshzle settings
+bindkey "^[(" kill-word
+bindkey "^W" backward-kill-word
+
 # Local completions
 FPATH="$HOME/.local/share/zsh/site-functions${FPATH:+:$FPATH}"
 
