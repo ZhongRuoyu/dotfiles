@@ -13,9 +13,8 @@ alias l="ls -ahl"
 alias la="ls -Ahl"
 alias ll="ls -hl"
 
-# Let tar ignore .DS_Store and ._ files
+# Make tar ignore .DS_Store and ._ files
 tar() {
-  # if [ "$#" -ge 1 ] && [ "${1:0:1}" != "-" ]; then
   if [ "$#" -ge 1 ] && [ "$(printf '%s' "$1" | cut -c 1)" != "-" ]; then
     _tar_options="$1"
     shift 1
