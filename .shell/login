@@ -43,12 +43,17 @@ load_homebrew() {
   "Linux") HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}" ;;
   *) return ;;
   esac
-  if [ ! -e "$HOMEBREW_PREFIX" ]; then
-    HOMEBREW_PREFIX="$HOME/.local/opt/homebrew"
-    if [ ! -e "$HOMEBREW_PREFIX" ]; then
-      return
+  while true; do
+    if [ -e "$HOMEBREW_PREFIX" ]; then
+      break
     fi
-  fi
+    HOMEBREW_PREFIX="$HOME/.local/opt/homebrew"
+    if [ -e "$HOMEBREW_PREFIX" ]; then
+      break
+    fi
+    unset HOMEBREW_PREFIX
+    return
+  done
   export HOMEBREW_PREFIX
   eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
 }
@@ -59,6 +64,7 @@ unset -f load_homebrew
 load_cargo() {
   CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
   if [ ! -e "$CARGO_HOME/env" ]; then
+    unset CARGO_HOME
     return
   fi
   export CARGO_HOME

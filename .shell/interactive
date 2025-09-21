@@ -35,6 +35,7 @@ fi
 load_keychain() {
   KEYCHAIN_PREFIX="${KEYCHAIN_PREFIX:-$HOME/.local/opt/keychain}"
   if [ ! -e "$KEYCHAIN_PREFIX" ]; then
+    unset KEYCHAIN_PREFIX
     return
   fi
   export KEYCHAIN_PREFIX
@@ -85,6 +86,7 @@ load_conda() {
   uninstall_conda_aliases
   CONDA_ROOT="${CONDA_ROOT:-$HOME/.local/opt/miniforge3}"
   if [ ! -e "$CONDA_ROOT" ]; then
+    unset CONDA_ROOT
     "$@"
     return
   fi
@@ -151,6 +153,7 @@ load_nodenv() {
   uninstall_nodenv_aliases
   NODENV_ROOT="${NODENV_ROOT:-$HOME/.nodenv}"
   if [ ! -e "$NODENV_ROOT" ]; then
+    unset NODENV_ROOT
     "$@"
     return
   fi
@@ -212,6 +215,7 @@ load_rbenv() {
   uninstall_rbenv_aliases
   RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
   if [ ! -e "$RBENV_ROOT" ]; then
+    unset RBENV_ROOT
     "$@"
     return
   fi
