@@ -67,6 +67,7 @@ SAVEHIST=65536
 HISTSIZE=65536
 
 # zshzle settings
+bindkey -e
 bindkey "^[(" kill-word
 bindkey "^W" backward-kill-word
 
