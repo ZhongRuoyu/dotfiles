@@ -25,6 +25,12 @@ if [[ -n "$HOMEBREW_PREFIX" ]]; then
   fi
 fi
 
+# conda and mamba completions
+if [[ -n "$CONDA_ROOT" ]] && [[ -e "$CONDA_ROOT/condabin/mamba" ]]; then
+  complete -o default -F _umamba_bash_completions conda
+  complete -o default -F _umamba_bash_completions mamba
+fi
+
 # Prompt settings
 PS1="[\u@\h \W]\\$ "
 
