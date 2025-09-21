@@ -49,7 +49,7 @@ bindkey "^W" backward-kill-word
 FPATH="$HOME/.local/share/zsh/site-functions${FPATH:+:$FPATH}"
 
 # Local interactive profile
-if [[ -e "$HOME/.zsh/interactive.local" ]]; then
+if [[ -r "$HOME/.zsh/interactive.local" ]]; then
   # shellcheck source=/dev/null
   source "$HOME/.zsh/interactive.local"
 fi

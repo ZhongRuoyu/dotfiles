@@ -225,7 +225,7 @@ load_rbenv() {
 install_rbenv_aliases
 
 # Local interactive profile
-if [ -e "$HOME/.shell/interactive.local" ]; then
+if [ -r "$HOME/.shell/interactive.local" ]; then
   # shellcheck source=/dev/null
   . "$HOME/.shell/interactive.local"
 fi

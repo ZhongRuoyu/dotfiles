@@ -4,7 +4,7 @@
 source "$HOME/.shell/login"
 
 # Local login profile
-if [[ -e "$HOME/.bash/login.local" ]]; then
+if [[ -r "$HOME/.bash/login.local" ]]; then
   # shellcheck source=/dev/null
   . "$HOME/.bash/login.local"
 fi

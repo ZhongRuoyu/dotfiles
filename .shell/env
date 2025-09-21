@@ -4,6 +4,6 @@ export ENV="$HOME/.sh/interactive"
 export BASH_ENV="$HOME/.bash/env"
 
 # Local env profile
-if [ -e "$HOME/.shell/env.local" ]; then
+if [ -r "$HOME/.shell/env.local" ]; then
   . "$HOME/.shell/env.local"
 fi

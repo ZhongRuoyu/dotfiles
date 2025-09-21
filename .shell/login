@@ -63,7 +63,7 @@ unset -f load_homebrew
 # Cargo
 load_cargo() {
   CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
-  if [ ! -e "$CARGO_HOME/env" ]; then
+  if [ ! -r "$CARGO_HOME/env" ]; then
     unset CARGO_HOME
     return
   fi
@@ -86,7 +86,7 @@ export SHELL_UTILS_PREFIX="${SHELL_UTILS_PREFIX:-$HOME/.local/opt/shell-utils}"
 export PATH="$SHELL_UTILS_PREFIX/bin${PATH:+:$PATH}"
 
 # Local login profile
-if [ -e "$HOME/.shell/login.local" ]; then
+if [ -r "$HOME/.shell/login.local" ]; then
   # shellcheck source=/dev/null
   . "$HOME/.shell/login.local"
 fi

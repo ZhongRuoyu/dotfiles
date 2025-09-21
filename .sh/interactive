@@ -7,7 +7,7 @@
 PS1="[\u@\h \W]\\$ "
 
 # Local interactive profile
-if [ -e "$HOME/.sh/interactive.local" ]; then
+if [ -r "$HOME/.sh/interactive.local" ]; then
   # shellcheck source=/dev/null
   . "$HOME/.sh/interactive.local"
 fi
