@@ -4,8 +4,9 @@
 alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 
-# Allow alias substitution after sudo
+# Allow alias substitution after commands
 alias sudo="sudo "
+alias xargs="xargs "
 
 # Common aliases
 alias l="ls -ahl"
