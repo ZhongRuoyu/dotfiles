@@ -45,7 +45,17 @@ load_keychain
 unset -f load_keychain
 
 # Conda
+CONDA_ROOT="${CONDA_ROOT:-$HOME/.local/opt/miniforge3}"
+if [ -e "$CONDA_ROOT" ]; then
+  export CONDA_ROOT
+else
+  unset CONDA_ROOT
+fi
 install_conda_aliases() {
+  unset -f install_conda_aliases
+  if [ -z "$CONDA_ROOT" ]; then
+    return
+  fi
   set -- \
     conda \
     mamba micromamba \
@@ -64,6 +74,10 @@ load_conda $_install_conda_aliases_conda_alias"
   unset _install_conda_aliases_conda_alias
 }
 uninstall_conda_aliases() {
+  unset -f uninstall_conda_aliases
+  if [ -z "$CONDA_ROOT" ]; then
+    return
+  fi
   set -- \
     conda \
     mamba micromamba \
@@ -82,14 +96,12 @@ uninstall_conda_aliases() {
   unset _uninstall_conda_aliases_conda_alias
 }
 load_conda() {
+  unset -f load_conda
   uninstall_conda_aliases
-  CONDA_ROOT="${CONDA_ROOT:-$HOME/.local/opt/miniforge3}"
-  if [ ! -e "$CONDA_ROOT" ]; then
-    unset CONDA_ROOT
+  if [ -z "$CONDA_ROOT" ]; then
     "$@"
     return
   fi
-  export CONDA_ROOT
   _load_conda_shell="$(ps -o comm= -p "$$" | sed -En 's/^(-|.*\/)?(.*)$/\2/p')"
   case "$_load_conda_shell" in
   bash | csh | fish | zsh) ;;
@@ -97,8 +109,7 @@ load_conda() {
   esac
   eval "$("$CONDA_ROOT/bin/conda" "shell.$_load_conda_shell" hook)"
   if [ -e "$CONDA_ROOT/condabin/mamba" ]; then
-    MAMBA_ROOT_PREFIX="$CONDA_ROOT"
-    export MAMBA_ROOT_PREFIX
+    export MAMBA_ROOT_PREFIX="$CONDA_ROOT"
     eval "$(
       "$CONDA_ROOT/condabin/mamba" shell hook \
         --shell "$_load_conda_shell" \
@@ -112,6 +123,7 @@ load_conda() {
       conda activate default
     fi
   fi
+  unset _load_conda_shell
   if [ -n "$VIRTUAL_ENV" ]; then
     export PATH="$VIRTUAL_ENV/bin${PATH:+:$PATH}"
   fi
@@ -120,7 +132,17 @@ load_conda() {
 install_conda_aliases
 
 # nodenv
+NODENV_ROOT="${NODENV_ROOT:-$HOME/.nodenv}"
+if [ -e "$NODENV_ROOT" ]; then
+  export NODENV_ROOT
+else
+  unset NODENV_ROOT
+fi
 install_nodenv_aliases() {
+  unset -f install_nodenv_aliases
+  if [ -z "$NODENV_ROOT" ]; then
+    return
+  fi
   set -- \
     nodenv \
     corepack \
@@ -135,6 +157,10 @@ load_nodenv $_install_nodenv_aliases_nodenv_alias"
   unset _install_nodenv_aliases_nodenv_alias
 }
 uninstall_nodenv_aliases() {
+  unset -f uninstall_nodenv_aliases
+  if [ -z "$NODENV_ROOT" ]; then
+    return
+  fi
   set -- \
     nodenv \
     corepack \
@@ -149,22 +175,29 @@ uninstall_nodenv_aliases() {
   unset _uninstall_nodenv_aliases_nodenv_alias
 }
 load_nodenv() {
+  unset -f load_nodenv
   uninstall_nodenv_aliases
-  NODENV_ROOT="${NODENV_ROOT:-$HOME/.nodenv}"
-  if [ ! -e "$NODENV_ROOT" ]; then
-    unset NODENV_ROOT
+  if [ -z "$NODENV_ROOT" ]; then
     "$@"
     return
   fi
-  export NODENV_ROOT
-  export PATH="$NODENV_ROOT/bin${PATH:+:$PATH}"
   eval "$("$NODENV_ROOT/bin/nodenv" init -)"
   "$@"
 }
 install_nodenv_aliases
 
 # rbenv
+RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
+if [ -e "$RBENV_ROOT" ]; then
+  export RBENV_ROOT
+else
+  unset RBENV_ROOT
+fi
 install_rbenv_aliases() {
+  unset -f install_rbenv_aliases
+  if [ -z "$RBENV_ROOT" ]; then
+    return
+  fi
   set -- \
     rbenv \
     bundle \
@@ -179,6 +212,7 @@ install_rbenv_aliases() {
     rdoc \
     ri \
     ruby \
+    syntax_suggest \
     typeprof
   for _install_rbenv_aliases_rbenv_alias in "$@"; do
     # shellcheck disable=SC2139
@@ -188,6 +222,10 @@ load_rbenv $_install_rbenv_aliases_rbenv_alias"
   unset _install_rbenv_aliases_rbenv_alias
 }
 uninstall_rbenv_aliases() {
+  unset -f uninstall_rbenv_aliases
+  if [ -z "$RBENV_ROOT" ]; then
+    return
+  fi
   set -- \
     rbenv \
     bundle \
@@ -202,6 +240,7 @@ uninstall_rbenv_aliases() {
     rdoc \
     ri \
     ruby \
+    syntax_suggest \
     typeprof
   for _uninstall_rbenv_aliases_rbenv_alias in "$@"; do
     if alias "$_uninstall_rbenv_aliases_rbenv_alias" >/dev/null 2>&1; then
@@ -211,14 +250,12 @@ uninstall_rbenv_aliases() {
   unset _uninstall_rbenv_aliases_rbenv_alias
 }
 load_rbenv() {
+  unset -f load_rbenv
   uninstall_rbenv_aliases
-  RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
-  if [ ! -e "$RBENV_ROOT" ]; then
-    unset RBENV_ROOT
+  if [ -z "$RBENV_ROOT" ]; then
     "$@"
     return
   fi
-  export RBENV_ROOT
   eval "$("$RBENV_ROOT/bin/rbenv" init -)"
   "$@"
 }
