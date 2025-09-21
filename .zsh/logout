@@ -6,5 +6,5 @@ source "$HOME/.shell/logout"
 # Local logout profile
 if [[ -r "$HOME/.zsh/logout.local" ]]; then
   # shellcheck source=/dev/null
-  . "$HOME/.zsh/logout.local"
+  source "$HOME/.zsh/logout.local"
 fi

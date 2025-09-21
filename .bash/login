@@ -6,5 +6,5 @@ source "$HOME/.shell/login"
 # Local login profile
 if [[ -r "$HOME/.bash/login.local" ]]; then
   # shellcheck source=/dev/null
-  . "$HOME/.bash/login.local"
+  source "$HOME/.bash/login.local"
 fi
