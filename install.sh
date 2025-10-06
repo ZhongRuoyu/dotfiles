@@ -116,7 +116,6 @@ uninstall() {
 }
 
 files=()
-uninstall_files=()
 while [[ "$#" -ge 1 ]]; do
   case "$1" in
   "-h" | "--help")
@@ -165,22 +164,16 @@ if [[ "${#files[@]}" -eq 0 ]]; then
     fi
     files+=("$file")
   done < <(git ls-tree --full-tree --name-only -r HEAD)
-
-  while IFS="" read -r file; do
-    if excluded "$file"; then
-      continue
-    fi
-    if ignored "$file"; then
-      echo "Note: $file is ignored."
-      continue
-    fi
-    uninstall_files+=("$file")
-  done < <(git log --all --pretty=format: --name-only --diff-filter=D)
 fi
 
 for file in "${files[@]}"; do
   install "$file"
 done
+
+uninstall_files=(
+  .pylintrc
+  .style.yapf
+)
 for file in "${uninstall_files[@]}"; do
   uninstall "$file"
 done
