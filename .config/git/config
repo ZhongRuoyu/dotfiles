@@ -1,0 +1,22 @@
+[user]
+  name = Ruoyu Zhong
+  email = zhongruoyu@outlook.com
+  signingKey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENG95BByYQBeMHGo7TB0bHxMG5lfbEmRr9MJahJV49h zhongruoyu@outlook.com
+[core]
+  excludesFile = ~/.gitignore_global
+[init]
+  defaultBranch = main
+[pull]
+  rebase = false
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed_signers
+
+# Signing configuration should live in ~/.gitconfig (purposed as host-specific)
+# as it is not always possible to sign commits.
+# https://git-scm.com/docs/git-config#FILES
+# [commit]
+#   gpgSign = true
+# [tag]
+#   gpgSign = true
