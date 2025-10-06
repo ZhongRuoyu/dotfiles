@@ -21,7 +21,8 @@
 .LSOverrride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -43,14 +44,9 @@ Temporary Items
 .apdisk
 
 
-# Clangd
-.clangd/
-.cache
-compile_commands.json
-
 # Visual Studio Code
 .vscode/
 
-# JetBrains
-.idea/
-
+# Clangd
+.cache/
+.clangd/
