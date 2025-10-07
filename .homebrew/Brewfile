@@ -100,7 +100,6 @@ if OS.mac?
   cask "zoom"
 
   if Hardware::CPU.arm?
-    cask "chatgpt"
     cask "virtualbuddy"
   end
 end
