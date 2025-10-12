@@ -23,13 +23,6 @@ export EDITOR=vim
 export PAGER=less
 export VISUAL=vim
 
-# Local paths
-export PATH="$HOME/.local/bin${PATH:+:$PATH}"
-export MANPATH="$HOME/.local/share/man${MANPATH:+:$MANPATH}:"
-export INFOPATH="$HOME/.local/share/info${INFOPATH:+:$INFOPATH}:"
-export CPATH="$HOME/.local/include${CPATH:+:$CPATH}"
-export LIBRARY_PATH="$HOME/.local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
-
 # Homebrew
 load_homebrew() {
   case "$(uname -s)" in
@@ -94,6 +87,13 @@ if [ -e "$SHELL_UTILS_PREFIX" ]; then
 else
   unset SHELL_UTILS_PREFIX
 fi
+
+# Local paths
+export PATH="$HOME/.local/bin${PATH:+:$PATH}"
+export MANPATH="$HOME/.local/share/man${MANPATH:+:$MANPATH}:"
+export INFOPATH="$HOME/.local/share/info${INFOPATH:+:$INFOPATH}:"
+export CPATH="$HOME/.local/include${CPATH:+:$CPATH}"
+export LIBRARY_PATH="$HOME/.local/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
 
 # Local login profile
 if [ -r "$HOME/.shell/login.local" ]; then
