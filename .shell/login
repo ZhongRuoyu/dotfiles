@@ -67,6 +67,9 @@ load_cargo() {
 load_cargo
 unset -f load_cargo
 
+# Go
+export GOPATH="${GOPATH:-$HOME/.go}"
+
 # shims
 # https://github.com/ZhongRuoyu/shims
 SHIMS_PREFIX="${SHIMS_PREFIX:-$HOME/.local/opt/shims}"
