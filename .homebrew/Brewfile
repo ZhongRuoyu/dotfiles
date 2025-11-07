@@ -94,6 +94,8 @@ if OS.mac?
   cask "zoom"
 
   if Hardware::CPU.arm?
+    brew "container"
+
     cask "virtualbuddy"
   end
 end
