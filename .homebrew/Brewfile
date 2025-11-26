@@ -78,6 +78,7 @@ if OS.mac?
   tap "powershell/tap"
   brew "powershell/tap/powershell"
 
+  cask "adobe-acrobat-reader"
   cask "firefox"
   cask "google-chrome"
   cask "iina"
