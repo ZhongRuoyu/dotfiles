@@ -82,7 +82,6 @@ if OS.mac?
   cask "iterm2"
   cask "keka"
   cask "notion"
-  cask "obs"
   cask "postman"
   cask "raspberry-pi-imager"
   cask "slack"
