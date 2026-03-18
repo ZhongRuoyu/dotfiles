@@ -84,7 +84,6 @@ if OS.mac?
   cask "notion"
   cask "raspberry-pi-imager"
   cask "slack"
-  cask "steam"
   cask "suspicious-package"
   cask "transmission"
   cask "utm"
