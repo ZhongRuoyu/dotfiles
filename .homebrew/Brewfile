@@ -75,7 +75,6 @@ brew "yq"
 brew "yt-dlp"
 
 if OS.mac?
-  cask "adobe-acrobat-reader"
   cask "bruno"
   cask "firefox"
   cask "google-chrome"
