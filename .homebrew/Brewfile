@@ -79,18 +79,11 @@ if OS.mac?
   cask "iina"
   cask "iterm2"
   cask "keka"
-  cask "notion"
-  cask "raspberry-pi-imager"
-  cask "slack"
   cask "suspicious-package"
   cask "transmission"
-  cask "utm"
   cask "visual-studio-code"
-  cask "zoom"
 
   if Hardware::CPU.arm?
     brew "container"
-
-    cask "virtualbuddy"
   end
 end

@@ -1,0 +1,11 @@
+if OS.mac?
+  cask "notion"
+  cask "raspberry-pi-imager"
+  cask "slack"
+  cask "utm"
+  cask "zoom"
+
+  if Hardware::CPU.arm?
+    cask "virtualbuddy"
+  end
+end
