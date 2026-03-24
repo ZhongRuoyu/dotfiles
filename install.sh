@@ -6,6 +6,7 @@ cd "${0%/*}"
 
 destination="$HOME"
 interactive=""
+force=""
 
 usage() {
   cat <<EOF
@@ -15,7 +16,8 @@ Options:
   -h, --help            Display this help text
   -d <dir>, --destination <dir>
                         Set destination directory (default: $HOME)
-  -i, --interactive     Prompt before installing or deleting files
+  -i, --interactive     Prompt before installing or deleting files (default)
+  -f, --force           Do not prompt before installing or deleting files
 
 EOF
 }
@@ -131,6 +133,10 @@ while [[ "$#" -ge 1 ]]; do
     interactive="1"
     shift
     ;;
+  "-f" | "--force")
+    force="1"
+    shift
+    ;;
   "--")
     files+=("$@")
     shift "$#"
@@ -141,6 +147,13 @@ while [[ "$#" -ge 1 ]]; do
     ;;
   esac
 done
+
+if [[ -n "$force" ]] && [[ -n "$interactive" ]]; then
+  echo "Error: options --force and --interactive cannot be used together." >&2
+  exit 1
+elif [[ -z "$force" ]] && [[ -z "$interactive" ]] && [[ -t 0 ]]; then
+  interactive="1"
+fi
 
 if [[ ! -e "$destination" ]]; then
   echo "Error: destination directory $destination does not exist." >&2
