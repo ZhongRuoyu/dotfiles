@@ -89,7 +89,7 @@ install() {
     fi
   fi
   mkdir -p -- "$(dirname "$destination/$file")"
-  cp -- "$file" "$destination/$file"
+  cp -P -- "$file" "$destination/$file"
   echo "Installed $file to $destination/$file"
 }
 
