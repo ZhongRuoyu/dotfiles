@@ -27,7 +27,7 @@ ignored() {
   if [[ ! -f "$destination/.dotfiles_ignore" ]]; then
     return 1
   fi
-  if grep -Fqx "$file" "$destination/.dotfiles_ignore"; then
+  if grep -Fqx -e "$file" -- "$destination/.dotfiles_ignore"; then
     return 0
   fi
   return 1
@@ -58,7 +58,7 @@ install() {
       echo "Warning: $destination/$file is not a regular file; skipped"
       return
     fi
-    if cmp -s "$file" "$destination/$file"; then
+    if cmp -s -- "$file" "$destination/$file"; then
       echo "$file is up to date."
       return
     fi
@@ -69,7 +69,8 @@ install() {
         case "$input" in
         [Yy]) break ;;
         [Nn] | "") return ;;
-        [Dd] | [Dd][Ii][Ff][Ff]) diff "$file" "$destination/$file" | ${PAGER:-less} ;;
+        [Dd] | [Dd][Ii][Ff][Ff])
+          diff -Nu -- "$destination/$file" "$file" | ${PAGER:-less} ;;
         *) echo "Please enter a valid option." ;;
         esac
       done
@@ -87,8 +88,8 @@ install() {
       done
     fi
   fi
-  mkdir -p "$(dirname "$destination/$file")"
-  cp "$file" "$destination/$file"
+  mkdir -p -- "$(dirname "$destination/$file")"
+  cp -- "$file" "$destination/$file"
   echo "Installed $file to $destination/$file"
 }
 
@@ -113,7 +114,7 @@ uninstall() {
       esac
     done
   fi
-  rm "$destination/$file"
+  rm -- "$destination/$file"
   echo "Removed $destination/$file"
 }
 
@@ -156,7 +157,11 @@ elif [[ -z "$force" ]] && [[ -z "$interactive" ]] && [[ -t 0 ]]; then
 fi
 
 if [[ ! -e "$destination" ]]; then
-  echo "Error: destination directory $destination does not exist." >&2
+  echo "Error: destination $destination does not exist." >&2
+  exit 1
+fi
+if [[ ! -d "$destination" ]]; then
+  echo "Error: destination $destination is not a directory." >&2
   exit 1
 fi
 for file in "${files[@]}"; do
