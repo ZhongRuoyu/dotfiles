@@ -8,6 +8,22 @@ destination="$HOME"
 interactive=""
 force=""
 
+if [[ -t 1 ]] && [[ "$TERM" != "dumb" ]]; then
+  diff=(diff -Nu --color=always --)
+else
+  diff=(diff -Nu --)
+fi
+
+pager="${PAGER:-}"
+if [[ -z "$pager" ]]; then
+  for pager_cmd in less more; do
+    if command -v "$pager_cmd" > /dev/null 2>&1; then
+      pager="$pager_cmd"
+      break
+    fi
+  done
+fi
+
 usage() {
   cat <<EOF
 Usage: $(basename "$0") [options] [<file>...]
@@ -50,6 +66,14 @@ excluded() {
   return 1
 }
 
+show_diff() {
+  if [[ -n "$pager" ]]; then
+    "${diff[@]}" "$destination/$1" "$1" | $pager
+  else
+    "${diff[@]}" "$destination/$1" "$1"
+  fi
+}
+
 install() {
   local file="$1"
   local input
@@ -69,8 +93,7 @@ install() {
         case "$input" in
         [Yy]) break ;;
         [Nn] | "") return ;;
-        [Dd] | [Dd][Ii][Ff][Ff])
-          diff -Nu -- "$destination/$file" "$file" | ${PAGER:-less} ;;
+        [Dd] | [Dd][Ii][Ff][Ff]) show_diff "$file" ;;
         *) echo "Please enter a valid option." ;;
         esac
       done
