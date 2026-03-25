@@ -80,7 +80,6 @@ if OS.mac?
   cask "iterm2"
   cask "keka"
   cask "suspicious-package"
-  cask "transmission"
   cask "visual-studio-code"
 
   if Hardware::CPU.arm?
