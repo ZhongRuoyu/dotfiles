@@ -10,12 +10,12 @@ To install the dotfiles, run:
 ./install.sh
 ```
 
-By default, the installation script does not prompt for confirmation before
-overwriting files.
-To request confirmation before attempting to overwrite files, run:
+By default, the installation script prompts for confirmation before overwriting
+files.
+To force overwriting files without requesting confirmation, run:
 
 ```shell
-./install.sh -i
+./install.sh -f
 ```
 
 ## Inspiration
