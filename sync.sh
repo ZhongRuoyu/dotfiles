@@ -72,6 +72,7 @@ while [[ "$#" -ge 1 ]]; do
     shift
     ;;
   "--")
+    shift
     files+=("$@")
     shift "$#"
     ;;
