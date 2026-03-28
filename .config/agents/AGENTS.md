@@ -34,6 +34,8 @@ They should always be followed, unless you are explicitly told to ignore them.
   if it differs.
 - Use semantic line breaks (i.e., start new lines after sentence boundaries),
   though the max 80 characters rule still applies.
+- Use ASCII characters only, unless the text is in a language that does not use
+  the Latin alphabet.
 - Avoid contractions.
 - Avoid emojis.
 
