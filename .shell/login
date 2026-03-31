@@ -70,7 +70,8 @@ unset -f load_cargo
 # Go
 export GOPATH="${GOPATH:-$HOME/.go}"
 if [ -e "$GOPATH" ]; then
-  export PATH="$GOPATH/bin${PATH:+:$PATH}"
+  export GOBIN="$GOPATH/bin"
+  export PATH="$GOBIN${PATH:+:$PATH}"
 else
   unset GOPATH
 fi
