@@ -6,6 +6,8 @@
   excludesFile = ~/.gitignore_global
 [init]
   defaultBranch = main
+[fetch]
+  prune = true
 [pull]
   rebase = false
 [gpg]
