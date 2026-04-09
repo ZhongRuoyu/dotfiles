@@ -73,6 +73,12 @@ brew "yq"
 brew "yt-dlp"
 
 if OS.mac?
+  if Hardware::CPU.arm?
+    brew "container"
+  end
+end
+
+if OS.mac?
   cask "bruno"
   cask "firefox"
   cask "iina"
@@ -80,10 +86,6 @@ if OS.mac?
   cask "keka"
   cask "suspicious-package"
   cask "visual-studio-code"
-
-  if Hardware::CPU.arm?
-    brew "container"
-  end
 end
 
 if OS.mac?
