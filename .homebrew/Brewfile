@@ -75,7 +75,6 @@ brew "yt-dlp"
 if OS.mac?
   cask "bruno"
   cask "firefox"
-  cask "google-chrome"
   cask "iina"
   cask "iterm2"
   cask "keka"
