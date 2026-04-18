@@ -148,7 +148,9 @@ install_nodenv_aliases() {
     corepack \
     node \
     npm \
-    npx
+    npx \
+    pnpm \
+    yarn
   for _install_nodenv_aliases_nodenv_alias in "$@"; do
     # shellcheck disable=SC2139
     alias "$_install_nodenv_aliases_nodenv_alias"="\
@@ -166,7 +168,9 @@ uninstall_nodenv_aliases() {
     corepack \
     node \
     npm \
-    npx
+    npx \
+    pnpm \
+    yarn
   for _uninstall_nodenv_aliases_nodenv_alias in "$@"; do
     if alias "$_uninstall_nodenv_aliases_nodenv_alias" >/dev/null 2>&1; then
       unalias "$_uninstall_nodenv_aliases_nodenv_alias"
