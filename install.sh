@@ -74,15 +74,27 @@ show_diff() {
   fi
 }
 
+files_equal() {
+  local a="$1" b="$2"
+  if [[ -L "$a" ]] && [[ -L "$b" ]]; then
+    [[ "$(readlink -- "$a")" = "$(readlink -- "$b")" ]]
+  else
+    cmp -s -- "$a" "$b"
+  fi
+}
+
 install() {
   local file="$1"
   local input
-  if [[ -e "$destination/$file" ]]; then
-    if [[ ! -f "$destination/$file" ]]; then
+  if [[ -e "$destination/$file" ]] || [[ -L "$destination/$file" ]]; then
+    if [[ -L "$file" ]] && [[ ! -L "$destination/$file" ]]; then
+      echo "Warning: $destination/$file is not a symlink; skipped"
+      return
+    elif [[ -f "$file" ]] && [[ ! -f "$destination/$file" ]]; then
       echo "Warning: $destination/$file is not a regular file; skipped"
       return
     fi
-    if cmp -s -- "$file" "$destination/$file"; then
+    if files_equal "$file" "$destination/$file"; then
       echo "$file is up to date."
       return
     fi

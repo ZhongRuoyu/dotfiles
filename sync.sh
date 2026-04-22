@@ -46,17 +46,29 @@ excluded() {
   return 1
 }
 
+files_equal() {
+  local a="$1" b="$2"
+  if [[ -L "$a" ]] && [[ -L "$b" ]]; then
+    [[ "$(readlink -- "$a")" = "$(readlink -- "$b")" ]]
+  else
+    cmp -s -- "$a" "$b"
+  fi
+}
+
 sync() {
   local file="$1"
-  if [[ ! -f "$source/$file" ]]; then
+  if [[ -L "$source/$file" ]] && [[ ! -L "$file" ]]; then
+    echo "Warning: $file is not a symlink; skipped"
+    return
+  elif [[ -f "$source/$file" ]] && [[ ! -f "$file" ]]; then
     echo "Warning: $source/$file is not a regular file; skipped"
     return
   fi
-  if cmp -s "$file" "$source/$file"; then
+  if files_equal "$file" "$source/$file"; then
     echo "$file is up to date."
     return
   fi
-  cp -v "$source/$file" "$file"
+  cp -Pv -- "$source/$file" "$file"
 }
 
 files=()
