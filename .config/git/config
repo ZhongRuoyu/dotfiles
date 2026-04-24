@@ -10,8 +10,6 @@
   prune = true
 [pull]
   rebase = false
-[gpg]
-  format = ssh
 [gpg "ssh"]
   allowedSignersFile = ~/.ssh/allowed_signers
 
@@ -22,3 +20,5 @@
 #   gpgSign = true
 # [tag]
 #   gpgSign = true
+# [gpg]
+#   format = ssh
