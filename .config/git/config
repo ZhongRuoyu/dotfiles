@@ -14,6 +14,130 @@
 [gpg "ssh"]
   allowedSignersFile = ~/.ssh/allowed_signers
 
+[alias]
+  alias = "!alias() { \
+      : git config get; \
+      if [ \"$#\" -eq 0 ]; then \
+        git config get --all --show-names --regexp '^alias\\..+'; \
+      else \
+        for alias in \"$@\"; do :; done; \
+        i=0; \
+        while [ \"$((i+=1))\" -lt \"$#\" ]; do \
+          set -- \"$@\" \"$1\"; \
+          shift; \
+        done; \
+        shift; \
+        git config get \"$@\" alias.\"$alias\"; \
+      fi; \
+    }; alias"
+  a = add
+  app = apply
+  bs = bisect
+  bsb = bisect bad
+  bsg = bisect good
+  bsn = bisect new
+  bso = bisect old
+  bsr = bisect reset
+  bss = bisect start
+  bl = blame
+  b = branch
+  bsup = !git branch --set-upstream-to=origin/\"$(git rev-parse --abbrev-ref HEAD)\"
+  co = checkout
+  cor = checkout --recurse-submodules
+  cp = cherry-pick
+  cpa = cherry-pick --abort
+  cpc = cherry-pick --continue
+  cl = clone
+  clr = clone --recurse-submodules
+  c = commit
+  cam = commit --amend
+  cfu = commit --fixup
+  cf = config
+  cfg = config get
+  cfl = config list
+  cfs = config set
+  cfrm = config unset
+  d = diff
+  dc = diff --cached
+  du = diff @{upstream}
+  dw = diff --word-diff
+  f = fetch
+  fa = fetch --all
+  fo = fetch origin
+  lg = log
+  lga = log --oneline --graph --all
+  lgg = log --oneline --graph
+  lgs = log --stat
+  lgss = log --show-signature
+  ls = ls-files
+  m = merge
+  ma = merge --abort
+  mc = merge --continue
+  ms = merge --squash
+  mom = !git merge \"$(git symbolic-ref refs/remotes/origin/HEAD)\"
+  mum = !git merge \"$(git symbolic-ref refs/remotes/upstream/HEAD)\"
+  mb = merge-base
+  mbom = !git merge-base \"$(git symbolic-ref refs/remotes/origin/HEAD)\"
+  mbum = !git merge-base \"$(git symbolic-ref refs/remotes/upstream/HEAD)\"
+  l = pull
+  las = pull --autostash
+  p = push
+  psup = !git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\"
+  pu = push upstream
+  rb = rebase
+  rba = rebase --abort
+  rbc = rebase --continue
+  rbe = rebase --edit-todo
+  rbi = rebase --interactive
+  rbo = rebase --onto
+  rbs = rebase --skip
+  rbom = !git rebase \"$(git symbolic-ref refs/remotes/origin/HEAD)\"
+  rbum = !git rebase \"$(git symbolic-ref refs/remotes/upstream/HEAD)\"
+  rl = reflog
+  r = remote
+  ra = remote add
+  rmv = remote rename
+  rrm = remote remove
+  rh = reset
+  rhh = reset --hard
+  rhk = reset --keep
+  rhs = reset --soft
+  rhhu = reset --hard @{upstream}
+  rs = restore
+  rv = revert
+  rva = revert --abort
+  rvc = revert --continue
+  rp = rev-parse
+  rpa = rev-parse --abbrev-ref
+  rmc = rm --cached
+  sh = show
+  sheml = show --format=email
+  shref = show --no-patch --format=reference
+  sta = stash
+  staa = stash apply
+  std = stash drop
+  stl = stash list
+  stp = stash pop
+  sts = stash show
+  stss = stash show --stat
+  stssp = stash show --stat --patch
+  st = status
+  sm = submodule
+  sma = submodule add
+  smi = submodule init
+  smst = submodule status
+  smu = submodule update
+  smur = submodule update --recursive
+  sw = switch
+  swr = switch --recurse-submodules
+  t = tag
+  tls = tag --list --sort=-version:refname
+  wt = worktree
+  wta = worktree add
+  wtls = worktree list
+  wtmv = worktree move
+  wtrm = worktree remove
+
 # Signing configuration should live in ~/.gitconfig (purposed as host-specific)
 # as it is not always possible to sign commits.
 # https://git-scm.com/docs/git-config#FILES
