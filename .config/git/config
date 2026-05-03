@@ -5,6 +5,10 @@
   excludesFile = ~/.gitignore_global
 [init]
   defaultBranch = main
+[commit]
+  verbose = true
+[log]
+  decorate = auto
 [fetch]
   prune = true
 [pull]
