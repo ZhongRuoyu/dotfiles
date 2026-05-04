@@ -1,8 +1,6 @@
 [user]
   name = Ruoyu Zhong
   email = zhongruoyu@outlook.com
-[core]
-  excludesFile = ~/.gitignore_global
 [init]
   defaultBranch = main
 [commit]
