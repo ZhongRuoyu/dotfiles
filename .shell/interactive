@@ -9,6 +9,7 @@ alias sudo="sudo "
 alias xargs="xargs "
 
 # Common aliases
+alias g="git"
 alias l="ls -ahl"
 alias la="ls -Ahl"
 alias ll="ls -hl"
