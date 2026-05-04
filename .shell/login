@@ -21,6 +21,7 @@ unset -f set_locale
 # Default programs
 export EDITOR=vim
 export PAGER=less
+export LESS="-F -R"
 export VISUAL=vim
 
 # Homebrew
