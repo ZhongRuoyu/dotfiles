@@ -1,5 +1,11 @@
 # shellcheck shell=sh
 
+# https://specifications.freedesktop.org/basedir/latest/
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
 # Locale
 set_locale() {
   set -- "en_US.UTF-8" "en_US.utf8" "en_US" "C.UTF-8" "C.utf8" "C"
