@@ -79,6 +79,11 @@ while [[ "$#" -ge 1 ]]; do
     exit 0
     ;;
   "-s" | "--source")
+    if [[ "$#" -lt 2 ]]; then
+      echo "Error: option $1 requires an argument." >&2
+      usage
+      exit 1
+    fi
     shift
     source="$1"
     shift
