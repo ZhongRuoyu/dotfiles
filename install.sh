@@ -230,8 +230,16 @@ for file in "${files[@]}"; do
 done
 
 uninstall_files=(
+  .condarc
+  .gdbinit
   .gitignore_global
+  .homebrew/brew.env
+  .homebrew/Brewfile
+  .homebrew/Brewfile.personal
   .pylintrc
+  .rubocop.yml
+  .ruff.toml
+  .rustfmt.toml
   .style.yapf
 )
 for file in "${uninstall_files[@]}"; do
