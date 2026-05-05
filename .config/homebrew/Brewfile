@@ -101,7 +101,6 @@ if OS.mac?
   vscode "eamodio.gitlens"
   vscode "foxundermoon.shell-format"
   vscode "github.codespaces"
-  vscode "github.copilot-chat"
   vscode "github.vscode-github-actions"
   vscode "golang.go"
   vscode "james-yu.latex-workshop"
