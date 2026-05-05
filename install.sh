@@ -230,6 +230,7 @@ for file in "${files[@]}"; do
 done
 
 uninstall_files=(
+  .gitignore_global
   .pylintrc
   .style.yapf
 )
