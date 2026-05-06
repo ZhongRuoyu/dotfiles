@@ -41,7 +41,7 @@
   bss = bisect start
   bl = blame
   b = branch
-  bsup = !git branch --set-upstream-to=origin/\"$(git rev-parse --abbrev-ref HEAD)\"
+  bsup = !git branch --set-upstream-to=origin/\"$(git symbolic-ref --short HEAD)\"
   co = checkout
   cor = checkout --recurse-submodules
   cp = cherry-pick
@@ -74,15 +74,15 @@
   ma = merge --abort
   mc = merge --continue
   ms = merge --squash
-  mom = !git merge \"$(git symbolic-ref refs/remotes/origin/HEAD)\"
-  mum = !git merge \"$(git symbolic-ref refs/remotes/upstream/HEAD)\"
+  mom = !git merge \"$(git symbolic-ref --short refs/remotes/origin/HEAD)\"
+  mum = !git merge \"$(git symbolic-ref --short refs/remotes/upstream/HEAD)\"
   mb = merge-base
-  mbom = !git merge-base \"$(git symbolic-ref refs/remotes/origin/HEAD)\"
-  mbum = !git merge-base \"$(git symbolic-ref refs/remotes/upstream/HEAD)\"
+  mbom = !git merge-base \"$(git symbolic-ref --short refs/remotes/origin/HEAD)\"
+  mbum = !git merge-base \"$(git symbolic-ref --short refs/remotes/upstream/HEAD)\"
   l = pull
   las = pull --autostash
   p = push
-  psup = !git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\"
+  psup = !git push --set-upstream origin \"$(git symbolic-ref --short HEAD)\"
   pu = push upstream
   rb = rebase
   rba = rebase --abort
@@ -91,8 +91,8 @@
   rbi = rebase --interactive
   rbo = rebase --onto
   rbs = rebase --skip
-  rbom = !git rebase \"$(git symbolic-ref refs/remotes/origin/HEAD)\"
-  rbum = !git rebase \"$(git symbolic-ref refs/remotes/upstream/HEAD)\"
+  rbom = !git rebase \"$(git symbolic-ref --short refs/remotes/origin/HEAD)\"
+  rbum = !git rebase \"$(git symbolic-ref --short refs/remotes/upstream/HEAD)\"
   rl = reflog
   r = remote
   ra = remote add
