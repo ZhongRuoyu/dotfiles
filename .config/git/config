@@ -41,6 +41,13 @@
   bss = bisect start
   bl = blame
   b = branch
+  bdm = "!bdm() { \
+      :; \
+      git for-each-ref --merged=HEAD --format='%(refname:short)' refs/heads | \
+        grep -Fvx -e \"$(git branch --show-current)\" | \
+        tr '\\n' '\\0' | \
+        xargs -0 -r git branch --delete; \
+    }; bdm"
   bsup = !git branch --set-upstream-to=origin/\"$(git symbolic-ref --short HEAD)\"
   co = checkout
   cor = checkout --recurse-submodules
@@ -82,8 +89,7 @@
   l = pull
   las = pull --autostash
   p = push
-  psup = !git push --set-upstream origin \"$(git symbolic-ref --short HEAD)\"
-  pu = push upstream
+  pu = !git push --set-upstream origin \"$(git symbolic-ref --short HEAD)\"
   rb = rebase
   rba = rebase --abort
   rbc = rebase --continue
@@ -121,15 +127,17 @@
   sts = stash show
   stss = stash show --stat
   stssp = stash show --stat --patch
-  st = status
+  s = status
   sm = submodule
   sma = submodule add
   smi = submodule init
-  smst = submodule status
+  sms = submodule status
   smu = submodule update
   smur = submodule update --recursive
   sw = switch
   swr = switch --recurse-submodules
+  sr = symbolic-ref
+  srs = symbolic-ref --short
   t = tag
   tls = tag --list --sort=-version:refname
   wt = worktree
