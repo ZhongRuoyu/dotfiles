@@ -1,4 +1,0 @@
-auto_activate: false
-changeps1: false
-channels:
-  - conda-forge

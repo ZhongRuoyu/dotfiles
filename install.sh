@@ -231,6 +231,7 @@ done
 
 uninstall_files=(
   .condarc
+  .config/conda/condarc
   .gdbinit
   .gitignore_global
   .homebrew/brew.env
