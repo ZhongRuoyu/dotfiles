@@ -150,9 +150,11 @@
   wtmv = worktree move
   wtrm = worktree remove
 
-# Signing configuration should live in ~/.gitconfig (purposed as host-specific)
-# as it is not always possible to sign commits.
-# https://git-scm.com/docs/git-config#FILES
+[include]
+  path = ~/.config/git/config.local
+
+# Signing configuration should live in config.local as it is not always possible
+# to sign commits.
 # [user]
 #   signingKey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENG95BByYQBeMHGo7TB0bHxMG5lfbEmRr9MJahJV49h zhongruoyu@outlook.com
 # [commit]
