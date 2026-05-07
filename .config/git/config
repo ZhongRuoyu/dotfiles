@@ -3,14 +3,28 @@
   email = zhongruoyu@outlook.com
 [init]
   defaultBranch = main
+[checkout]
+  defaultRemote = origin
 [commit]
   verbose = true
 [log]
   decorate = auto
+[merge]
+  autoStash = true
+[rebase]
+  autoStash = true
 [fetch]
+  all = true
   prune = true
+  writeCommitGraph = true
 [pull]
-  rebase = false
+  rebase = true
+[push]
+  autoSetupRemote = true
+[gc]
+  writeCommitGraph = true
+[rerere]
+  enabled = true
 [gpg "ssh"]
   allowedSignersFile = ~/.ssh/allowed_signers
 
@@ -107,6 +121,7 @@
   ra = remote add
   rmv = remote rename
   rrm = remote remove
+  rrr = rerere
   rh = reset
   rhh = reset --hard
   rhk = reset --keep
