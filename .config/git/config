@@ -31,7 +31,8 @@
       fi; \
     }; alias"
   a = add
-  app = apply
+  ap = apply
+  ar = archive
   bs = bisect
   bsb = bisect bad
   bsg = bisect good
@@ -64,6 +65,8 @@
   cfl = config list
   cfs = config set
   cfrm = config unset
+  ds = describe
+  dst = describe --tags
   d = diff
   dc = diff --cached
   du = diff @{upstream}
@@ -119,6 +122,7 @@
   sh = show
   sheml = show --format=email
   shref = show --no-patch --format=reference
+  sb = show-branch
   sta = stash
   staa = stash apply
   std = stash drop
