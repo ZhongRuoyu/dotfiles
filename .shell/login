@@ -83,27 +83,6 @@ else
   unset GOPATH
 fi
 
-# shims
-# https://github.com/ZhongRuoyu/shims
-SHIMS_PREFIX="${SHIMS_PREFIX:-$HOME/.local/opt/shims}"
-if [ -e "$SHIMS_PREFIX" ]; then
-  export SHIMS_PREFIX
-  export SHIMS_LOCAL_PROFILES_PATH="$SHIMS_PREFIX/profiles"
-  export PATH="$SHIMS_PREFIX/local:$SHIMS_PREFIX/shims${PATH:+:$PATH}"
-else
-  unset SHIMS_PREFIX
-fi
-
-# shell-utils
-# https://github.com/ZhongRuoyu/shell-utils
-SHELL_UTILS_PREFIX="${SHELL_UTILS_PREFIX:-$HOME/.local/opt/shell-utils}"
-if [ -e "$SHELL_UTILS_PREFIX" ]; then
-  export SHELL_UTILS_PREFIX
-  export PATH="$SHELL_UTILS_PREFIX/bin${PATH:+:$PATH}"
-else
-  unset SHELL_UTILS_PREFIX
-fi
-
 # Local paths
 export PATH="$HOME/.local/bin${PATH:+:$PATH}"
 export MANPATH="$HOME/.local/share/man${MANPATH:+:$MANPATH}:"
