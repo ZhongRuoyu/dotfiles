@@ -76,6 +76,8 @@
   c = commit
   cam = commit --amend
   cfu = commit --fixup
+  cre = commit --reedit-message=ORIG_HEAD
+  cru = commit --reuse-message=ORIG_HEAD
   cf = config
   cfg = config get
   cfl = config list
