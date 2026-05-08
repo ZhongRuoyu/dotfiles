@@ -3,6 +3,7 @@ if ENV["HOMEBREW_NO_INSTALL_FROM_API"].present?
   tap "homebrew/cask"
 end
 
+brew "actionlint"
 brew "awscli"
 brew "bat"
 brew "bear"
@@ -71,6 +72,7 @@ brew "uv"
 brew "vim"
 brew "yq"
 brew "yt-dlp"
+brew "zizmor"
 
 if OS.mac?
   if Hardware::CPU.arm?
