@@ -9,6 +9,8 @@
   defaultRemote = origin
 [commit]
   verbose = true
+[diff]
+  algorithm = histogram
 [log]
   decorate = auto
 [merge]
@@ -18,6 +20,7 @@
 [fetch]
   all = true
   prune = true
+  pruneTags = true
   writeCommitGraph = true
 [pull]
   rebase = true
