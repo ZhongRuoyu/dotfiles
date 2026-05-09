@@ -29,6 +29,7 @@
 [gc]
   writeCommitGraph = true
 [rerere]
+  autoUpdate = true
   enabled = true
 [gpg "ssh"]
   allowedSignersFile = ~/.ssh/allowed_signers
