@@ -20,7 +20,6 @@
 [fetch]
   all = true
   prune = true
-  pruneTags = true
   writeCommitGraph = true
 [pull]
   rebase = true
