@@ -1,4 +1,4 @@
-if ENV["HOMEBREW_NO_INSTALL_FROM_API"].present?
+if Homebrew::EnvConfig.no_install_from_api?
   tap "homebrew/core"
   tap "homebrew/cask"
 end
