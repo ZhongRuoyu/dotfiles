@@ -134,3 +134,6 @@ if OS.mac?
   vscode "yzhang.markdown-all-in-one"
   vscode "zhuangtongfa.material-theme"
 end
+
+brewfile_local = Pathname.new(__FILE__).dirname/"Brewfile.local"
+instance_eval brewfile_local.read if brewfile_local.exist?
