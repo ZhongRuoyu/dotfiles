@@ -233,6 +233,7 @@ uninstall_files=(
   .condarc
   .config/conda/condarc
   .config/homebrew/Brewfile.personal
+  .config/rustfmt/rustfmt.toml
   .gdbinit
   .gitignore_global
   .homebrew/brew.env
@@ -241,7 +242,6 @@ uninstall_files=(
   .pylintrc
   .rubocop.yml
   .ruff.toml
-  .rustfmt.toml
   .style.yapf
 )
 for file in "${uninstall_files[@]}"; do
