@@ -141,6 +141,7 @@
   rvc = revert --continue
   rp = rev-parse
   rpa = rev-parse --abbrev-ref
+  rps = rev-parse --short
   rmc = rm --cached
   sh = show
   sheml = show --format=email
