@@ -16,6 +16,7 @@
 [merge]
   autoStash = true
 [rebase]
+  autoSquash = true
   autoStash = true
 [fetch]
   all = true
