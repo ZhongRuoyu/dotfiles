@@ -75,6 +75,7 @@
   cp = cherry-pick
   cpa = cherry-pick --abort
   cpc = cherry-pick --continue
+  cps = cherry-pick --skip
   cl = clone
   clr = clone --recurse-submodules
   c = commit
@@ -139,6 +140,7 @@
   rv = revert
   rva = revert --abort
   rvc = revert --continue
+  rvs = revert --skip
   rp = rev-parse
   rpa = rev-parse --abbrev-ref
   rps = rev-parse --short
