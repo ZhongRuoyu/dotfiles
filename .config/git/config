@@ -69,6 +69,7 @@
         tr '\\n' '\\0' | \
         xargs -0 -r git branch --delete; \
     }; bdm"
+  bsc = branch --show-current
   bsup = !git branch --set-upstream-to=origin/\"$(git symbolic-ref --short HEAD)\"
   co = checkout
   cor = checkout --recurse-submodules
