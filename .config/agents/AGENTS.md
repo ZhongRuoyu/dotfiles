@@ -29,8 +29,11 @@ They should always be followed, unless you are explicitly told to ignore them.
 
 - For all code and text, use 2-space indentation, with max 80 characters per
   line, though existing style should be followed if it differs.
-  Long paths and URLs should always be preserved in full even if the line
+- Long paths and URLs should always be preserved in full even if the line
   exceeds 80 characters.
+- Never use tabs, except in Makefiles and for languages where tabs are the
+  standard indentation method (e.g., Go).
+- Files should always end with a single newline character.
 
 ### Text style
 
