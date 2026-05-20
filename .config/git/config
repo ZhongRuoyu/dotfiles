@@ -114,7 +114,6 @@
   mbom = !git merge-base \"$(git symbolic-ref --short refs/remotes/origin/HEAD)\"
   mbum = !git merge-base \"$(git symbolic-ref --short refs/remotes/upstream/HEAD)\"
   l = pull
-  las = pull --autostash
   p = push
   pu = !git push --set-upstream origin \"$(git symbolic-ref --short HEAD)\"
   rb = rebase
