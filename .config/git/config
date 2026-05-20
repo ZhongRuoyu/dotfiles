@@ -93,6 +93,7 @@
   dst = describe --tags
   d = diff
   dc = diff --cached
+  ds = diff --stat
   du = diff @{upstream}
   dw = diff --word-diff
   f = fetch
@@ -146,6 +147,7 @@
   rps = rev-parse --short
   rmc = rm --cached
   sh = show
+  shs = show --stat
   sheml = show --format=email
   shref = show --no-patch --format=reference
   sb = show-branch
