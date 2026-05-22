@@ -21,13 +21,10 @@
 [fetch]
   all = true
   prune = true
-  writeCommitGraph = true
 [pull]
   rebase = true
 [push]
   autoSetupRemote = true
-[gc]
-  writeCommitGraph = true
 [rerere]
   autoUpdate = true
   enabled = true
