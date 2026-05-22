@@ -31,6 +31,7 @@ set hlsearch
 set incsearch
 " rulers
 set colorcolumn=81,101,121
+autocmd FileType gitcommit set colorcolumn=51,73
 highlight ColorColumn ctermbg=darkgray
 " whitespace display
 if has("multi_byte")
