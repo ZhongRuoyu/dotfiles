@@ -57,6 +57,21 @@ endif
 set wildmenu
 set wildmode=list:longest,list:full
 
+" https://vimhelp.org/spell.txt.html
+" enable spell checking for text files
+for filetype in [
+  \ 'asciidoc',
+  \ 'gitcommit',
+  \ 'html',
+  \ 'mail',
+  \ 'markdown',
+  \ 'rst',
+  \ 'tex',
+  \ 'typst'
+  \ ]
+  execute 'autocmd FileType ' . filetype . ' set spell'
+endfor
+
 " local configurations
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
