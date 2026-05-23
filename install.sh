@@ -58,7 +58,7 @@ excluded() {
   )
   local file="$1"
   local exclude
-  for exclude in "${excludes[@]}"; do
+  for exclude in "${excludes[@]+"${excludes[@]}"}"; do
     if [[ "$file" = "$exclude" ]]; then
       return 0
     fi
@@ -68,9 +68,9 @@ excluded() {
 
 show_diff() {
   if [[ -n "$pager" ]]; then
-    "${diff[@]}" "$destination/$1" "$1" | $pager
+    "${diff[@]}" "$destination/$1" "$1" | $pager || true
   else
-    "${diff[@]}" "$destination/$1" "$1"
+    "${diff[@]}" "$destination/$1" "$1" || true
   fi
 }
 
@@ -205,7 +205,7 @@ if [[ ! -d "$destination" ]]; then
   echo "Error: destination $destination is not a directory." >&2
   exit 1
 fi
-for file in "${files[@]}"; do
+for file in "${files[@]+"${files[@]}"}"; do
   if [[ ! -e "$file" ]]; then
     echo "Error: file $file does not exist." >&2
     exit 1
@@ -225,7 +225,7 @@ if [[ "${#files[@]}" -eq 0 ]]; then
   done < <(git ls-tree --full-tree --name-only -r HEAD)
 fi
 
-for file in "${files[@]}"; do
+for file in "${files[@]+"${files[@]}"}"; do
   install "$file"
 done
 
@@ -244,6 +244,6 @@ uninstall_files=(
   .ruff.toml
   .style.yapf
 )
-for file in "${uninstall_files[@]}"; do
+for file in "${uninstall_files[@]+"${uninstall_files[@]}"}"; do
   uninstall "$file"
 done

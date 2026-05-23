@@ -38,7 +38,7 @@ excluded() {
   )
   local file="$1"
   local exclude
-  for exclude in "${excludes[@]}"; do
+  for exclude in "${excludes[@]+"${excludes[@]}"}"; do
     if [[ "$file" = "$exclude" ]]; then
       return 0
     fi
@@ -118,6 +118,6 @@ if [[ "${#files[@]}" -eq 0 ]]; then
   done < <(git ls-tree --full-tree --name-only -r HEAD)
 fi
 
-for file in "${files[@]}"; do
+for file in "${files[@]+"${files[@]}"}"; do
   sync "$file"
 done
