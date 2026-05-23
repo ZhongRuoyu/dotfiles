@@ -134,6 +134,7 @@ if OS.mac?
   vscode "vscjava.vscode-java-dependency"
   vscode "yzhang.markdown-all-in-one"
   vscode "zhuangtongfa.material-theme"
+  vscode "zizmor.zizmor-vscode"
 end
 
 brewfile_local = Pathname.new(__FILE__).dirname/"Brewfile.local"
