@@ -131,10 +131,13 @@
   rrm = remote remove
   rrr = rerere
   rh = reset
+  rhu = reset @{upstream}
   rhh = reset --hard
-  rhk = reset --keep
-  rhs = reset --soft
   rhhu = reset --hard @{upstream}
+  rhk = reset --keep
+  rhku = reset --keep @{upstream}
+  rhs = reset --soft
+  rhsu = reset --soft @{upstream}
   rs = restore
   rv = revert
   rva = revert --abort
