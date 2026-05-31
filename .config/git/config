@@ -168,7 +168,7 @@
   smi = submodule init
   sms = submodule status
   smu = submodule update
-  smur = submodule update --recursive
+  smur = submodule update --remote
   sw = switch
   swr = switch --recurse-submodules
   sr = symbolic-ref
