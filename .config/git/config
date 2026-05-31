@@ -107,6 +107,7 @@
   ma = merge --abort
   mc = merge --continue
   ms = merge --squash
+  mu = merge @{upstream}
   mom = !git merge \"$(git symbolic-ref --short refs/remotes/origin/HEAD)\"
   mum = !git merge \"$(git symbolic-ref --short refs/remotes/upstream/HEAD)\"
   mb = merge-base
@@ -122,6 +123,7 @@
   rbi = rebase --interactive
   rbo = rebase --onto
   rbs = rebase --skip
+  rbu = rebase @{upstream}
   rbom = !git rebase \"$(git symbolic-ref --short refs/remotes/origin/HEAD)\"
   rbum = !git rebase \"$(git symbolic-ref --short refs/remotes/upstream/HEAD)\"
   rl = reflog
