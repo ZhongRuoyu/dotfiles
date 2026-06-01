@@ -77,6 +77,12 @@
   cps = cherry-pick --skip
   cl = clone
   clr = clone --recurse-submodules
+  clgh = "!clgh() { \
+      : git clone; \
+      repo=\"$1\"; \
+      shift; \
+      git clone https://github.com/\"$repo\".git "$@"; \
+    }; clgh"
   c = commit
   cam = commit --amend
   cfu = commit --fixup
