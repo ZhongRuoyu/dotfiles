@@ -62,7 +62,9 @@ They should always be followed, unless you are explicitly told to ignore them.
 ## Commit messages
 
 - Do not commit changes directly unless asked to do so.
-- After making changes, always provide a concise but descriptive commit message
-  following the 50/72 rule, whether or not you are committing the changes.
+- After making changes, always provide a commit message, whether or not you are
+  committing the changes.
+- The commit message should have a concise title and descriptive body, and
+  follow the 50/72 rule.
 - Conventional commit messages are not necessary.
 - Never add `Co-Authored-By` with the name of the agent.
