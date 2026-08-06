@@ -14,9 +14,10 @@ They should always be followed, unless you are explicitly told to ignore them.
 ## Programming
 
 - Follow DRY, KISS, and YAGNI.
-- Prefer self-documenting code to explanatory comments.
-  Though non-trivial code and public-facing functions should have docstrings or
-  comments explaining their purpose and behavior.
+- Add explanatory comments when the code or its motivation is not trivial.
+  Public-facing functions should have doc comments explaining their purpose and
+  behavior.
+- Avoid obvious comments that do not add value.
 - Ensure that your code does not produce new errors or warnings;
   fix any that arise from your changes.
 - If there is a reason why a warning cannot be fixed, at least add a bypass
