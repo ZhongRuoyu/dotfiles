@@ -71,3 +71,10 @@ They should always be followed, unless you are explicitly told to ignore them.
 - The commit message should follow the 50/72 rule.
 - Conventional commit messages are not necessary.
 - Never add `Co-Authored-By` with the name of the agent.
+
+## Code reviews
+
+- Present findings with a clear explanation of the issue, its impact, and
+  possible concrete solutions.
+- Favor approving a change when it definitely improves the overall code health
+  and does not introduce new problems, even if it is not perfect.
