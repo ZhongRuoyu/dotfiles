@@ -85,7 +85,6 @@ if OS.mac?
 end
 
 if OS.mac?
-  cask "bruno"
   cask "firefox"
   cask "iina"
   cask "iterm2"
