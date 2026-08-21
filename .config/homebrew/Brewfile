@@ -85,6 +85,8 @@ if OS.mac?
 end
 
 if OS.mac?
+  cask "chatgpt"
+  cask "codex"
   cask "firefox"
   cask "iina"
   cask "iterm2"
