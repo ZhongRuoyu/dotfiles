@@ -88,6 +88,28 @@
   cfu = commit --fixup
   cre = commit --reedit-message=ORIG_HEAD
   cru = commit --reuse-message=ORIG_HEAD
+  co-author = "!co_author() { \
+      :; \
+      if [ \"$#\" -eq 0 ]; then \
+        set -- \"$(git config get user.name) <$(git config get user.email)>\"; \
+      fi; \
+      old_trailers=\"$(git show --format='%B' | git interpret-trailers --parse)\"; \
+      i=0; \
+      n=\"$#\"; \
+      while [ \"$i\" -lt \"$n\" ]; do \
+        i=$((i+1)); \
+        co_author=\"$1\"; \
+        shift; \
+        trailer=\"Co-authored-by: $co_author\"; \
+        if echo \"$old_trailers\" | grep -Fqx \"$trailer\"; then \
+          continue; \
+        fi; \
+        set -- \"$@\" \"--trailer=$trailer\"; \
+      done; \
+      git commit --amend --no-edit --quiet \"$@\"; \
+      git show --format=fuller --no-patch; \
+    }; co_author"
+  ca = co-author
   cf = config
   cfg = config get
   cfl = config list
