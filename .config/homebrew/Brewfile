@@ -116,6 +116,7 @@ if OS.mac?
   vscode "james-yu.latex-workshop"
   vscode "llvm-vs-code-extensions.vscode-clangd"
   vscode "mechatroner.rainbow-csv"
+  vscode "mkhl.shfmt"
   vscode "ms-python.python"
   vscode "ms-python.vscode-pylance"
   vscode "ms-toolsai.jupyter-renderers"
